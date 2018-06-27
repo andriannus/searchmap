@@ -23,7 +23,18 @@
 			</div>
 
 			<div class="navbar-end">
-			<!-- navbar items -->
+				<div class="navbar-item">
+					<div class="field is-grouped">
+						<p class="control">
+							<a class="button is-dark" href="https://github.com/andriannus/searchmap">
+								<span class="icon">
+									<i class="fab fa-github"></i>
+								</span>
+								<span>Github</span>
+							</a>
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</nav>

@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 	<script src="https://unpkg.com/vue@2.5.16/dist/vue.min.js"></script>
 
-	<!-- Replace API_KEY with 'Your API_KEY' -->
+	<!-- Replace 'API_KEY' with 'Your API_KEY' -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&libraries=places"></script>
 
 	<style>
@@ -22,7 +22,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</style>
 </head>
 <body>
-	<?php $this->load->view($navigation) ?>
+	<?php
+		if (isset($navigation)) {
+			$this->load->view($navigation);
+		}
+	?>
 	
 	<?php $this->load->view($page) ?>
 </body>

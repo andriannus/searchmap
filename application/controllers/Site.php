@@ -7,7 +7,7 @@ class Site extends CI_Controller {
 	{
 		$data = [
 			'title' => 'Selamat datang di SearchMap',
-			'navigation' => 'core/elements/navigation-a',
+			'navigation' => 'core/elements/navigation',
 			'page' => 'sites/index'
 		];
 
@@ -18,7 +18,6 @@ class Site extends CI_Controller {
 	{
 		$data = [
 			'title' => 'Cari Tempat yang Anda Ingingkan',
-			'navigation' => 'core/elements/navigation-b',
 			'page' => 'sites/map'
 		];
 
