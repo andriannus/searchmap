@@ -1,4 +1,4 @@
-# OngkirKuy
+# Search Map
 Find place with Autocomplete Google Maps API
 
 ## Tools
