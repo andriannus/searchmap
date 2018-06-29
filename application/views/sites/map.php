@@ -93,7 +93,7 @@
 				</div>
 			</section>
 			<footer class="modal-card-foot">
-				<button class="button is-success" @click="savePlace" v-if="!inTheProcess">Save</button>
+				<button class="button is-success" @click="savePlace" v-if="!inTheProcess" :disabled="!name">Save</button>
 				<button class="button is-success is-loading" v-if="inTheProcess">Save</button>
 				<button class="button" @click="switchModal">Cancel</button>
 			</footer>
