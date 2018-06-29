@@ -11,13 +11,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 	<script src="https://unpkg.com/vue@2.5.16/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://momentjs.com/downloads/moment.min.js"></script>
 
 	<!-- Replace 'API_KEY' with 'Your API_KEY' -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&libraries=places"></script>
 
 	<style>
 		html {
-			overflow-y: hidden;
+			overflow: auto;
+		}
+
+		.table-responsive {
+			overflow: auto;
 		}
 	</style>
 </head>

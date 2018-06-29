@@ -14,7 +14,7 @@
 
 		<div class="navbar-menu" :class="{ 'is-active': isActive }">
 			<div class="navbar-start">
-				<a class="navbar-item is-active">
+				<a class="navbar-item" href="<?= base_url('site') ?>">
 					Home
 				</a>
 				<a class="navbar-item" href="<?= base_url('site/map') ?>">
@@ -26,6 +26,13 @@
 				<div class="navbar-item">
 					<div class="field is-grouped">
 						<p class="control">
+							<a class="button is-info" href="<?= base_url('guest') ?>">
+								<span class="icon">
+									<i class="fas fa-book"></i>
+								</span>
+								<span>Guest Book</span>
+							</a>
+
 							<a class="button is-dark" href="https://github.com/andriannus/searchmap">
 								<span class="icon">
 									<i class="fab fa-github"></i>
