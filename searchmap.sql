@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 29, 2018 at 01:23 PM
+-- Generation Time: Jul 05, 2018 at 09:53 PM
 -- Server version: 10.1.33-MariaDB-1~xenial
 -- PHP Version: 7.2.5-1+ubuntu16.04.1+deb.sury.org+1
 
@@ -38,6 +38,21 @@ CREATE TABLE `tb_guestbook` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_guestbookarea`
+--
+
+CREATE TABLE `tb_guestbookarea` (
+  `id` int(5) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `area_name` varchar(100) NOT NULL,
+  `area_type` varchar(10) NOT NULL,
+  `area` text NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
@@ -49,6 +64,12 @@ ALTER TABLE `tb_guestbook`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tb_guestbookarea`
+--
+ALTER TABLE `tb_guestbookarea`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -56,7 +77,13 @@ ALTER TABLE `tb_guestbook`
 -- AUTO_INCREMENT for table `tb_guestbook`
 --
 ALTER TABLE `tb_guestbook`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tb_guestbookarea`
+--
+ALTER TABLE `tb_guestbookarea`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
