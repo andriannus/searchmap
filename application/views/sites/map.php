@@ -1,14 +1,9 @@
-<div id="app">
-	<section class="hero is-white is-fullheight" v-if="loadingMap">
-		<div class="hero-body">
-			<div class="container has-text-centered">
-				<p class="title"><i class="fas fa-spinner fa-spin"></i></p>
-				<p class="subtitle">Please wait..</p>
-			</div>
-		</div>
-	</section>
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 
-	<section class="hero is-white is-fullheight" v-if="!loadingMap && !placeFound">
+<div id="app">
+	<section class="hero is-white is-fullheight" v-if="!placeFound">
 		<div class="hero-body">
 			<div class="container has-text-centered">
 				<p class="title"><i class="fas fa-sad-tear"></i></p>
@@ -32,7 +27,7 @@
 		</div>
 	</section>
 
-	<div class="card" ref="mapCard" style="margin-left: 10px" :style="{ display: visibleCard }">
+	<div class="card" ref="mapCard" style="margin: 10px 0 0 10px" :style="{ display: visibleCard }">
 		<header class="card-header">
 			<p class="card-header-title" v-if="!haveId">Search here..</p>
 			<p class="card-header-title" v-if="haveId">Place by {{ name }}</p>
@@ -51,7 +46,7 @@
 		</div>
 		<footer class="card-footer">
 			<a href="<?= base_url('site/index') ?>" class="card-footer-item">Home</a>
-			<a href="<?= base_url('guest/index') ?>" class="card-footer-item has-text-centered">Guest Book</a>
+			<a href="<?= base_url('guest') ?>" class="card-footer-item has-text-centered">Guest Book</a>
 		</footer>
 	</div>
 
@@ -110,7 +105,6 @@ const app = new Vue({
 		placeAddress: '',
 		placeLat: '',
 		placeLng: '',
-		loadingMap: true,
 		visibleCard: 'none',
 		visibleInfoWindow: 'none',
 		visibleModal: false,
@@ -133,7 +127,8 @@ const app = new Vue({
 					lat: -6.595038,
 					lng: 106.816635
 				},
-				zoom: 13
+				zoom: 13,
+				disableDefaultUI: true
 			});
 
 			let card = this.$refs.mapCard // Get mapCard element
@@ -205,8 +200,7 @@ const app = new Vue({
 			});
 
 			google.maps.event.addListenerOnce(map, 'tilesloaded', function () {
-				app.visibleCard = 'block',
-				app.loadingMap = false
+				app.visibleCard = 'block'
 			})
 		},
 
@@ -219,7 +213,7 @@ const app = new Vue({
 						'&lat=' + this.placeLat + 
 						'&lng=' + this.placeLng
 
-			axios.post('<?= base_url() ?>' + 'guest/store', data)
+			axios.post('<?= base_url() ?>' + 'api/storePlace', data)
 				.then(res => {
 					this.inTheProcess = false
 					this.visibleModal = false
@@ -238,7 +232,7 @@ const app = new Vue({
 				this.initMap()
 
 			} else {
-				axios.get('<?= base_url() ?>' + 'guest/view/' + id)
+				axios.get('<?= base_url() ?>' + 'api/getOnePlace/' + id)
 					.then(res => {
 						this.name = res.data.data.name
 						this.placeName = res.data.data.place
@@ -251,7 +245,6 @@ const app = new Vue({
 					})
 					.catch(err => {
 						if (err.response.status === 404) {
-							this.loadingMap = false
 							this.placeFound = false
 						}
 					})

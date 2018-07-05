@@ -1,7 +1,11 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+
 <div id="app">
 	<nav class="navbar is-fixed-top is-light" role="navigation" aria-label="main navigation">
 		<div class="navbar-brand">
-			<a class="navbar-item" href="https://bulma.io">
+			<a class="navbar-item wow slideInLeft" href="<?= base_url('site') ?>" data-wow-duration="1s">
 				SEARCH MAP
 			</a>
 
@@ -14,16 +18,22 @@
 
 		<div class="navbar-menu" :class="{ 'is-active': isActive }">
 			<div class="navbar-start">
-				<a class="navbar-item" href="<?= base_url('site') ?>">
+				<a class="navbar-item wow slideInDown" href="<?= base_url('site') ?>" data-wow-duration="1s" data-wow-delay="0.2s">
+					<i class="fas fa-home"></i>&nbsp;
 					Home
 				</a>
-				<a class="navbar-item" href="<?= base_url('site/map') ?>">
+				<a class="navbar-item wow slideInDown" href="<?= base_url('site/map') ?>" data-wow-duration="1s" data-wow-delay="0.4s">
+					<i class="fas fa-map"></i>&nbsp;
 					Map
+				</a>
+				<a class="navbar-item wow slideInDown" href="<?= base_url('site/drawmap') ?>" data-wow-duration="1s" data-wow-delay="0.6s">
+					<i class="fas fa-pen"></i>&nbsp;
+					Draw Map
 				</a>
 			</div>
 
 			<div class="navbar-end">
-				<div class="navbar-item">
+				<div class="navbar-item wow slideInDown" data-wow-duration="1s" data-wow-delay="0.8s">
 					<div class="field is-grouped">
 						<p class="control">
 							<a class="button is-info" href="<?= base_url('guest') ?>">
