@@ -36,12 +36,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="card-content" v-if="!haveId">
 			<div class="content">
 				<div class="field">
-					<a href="<?= base_url('site/index') ?>" class="button is-large is-dark" title="Home">
+					<a href="<?= base_url() ?>" class="button is-large is-dark" title="Home">
 						<span class="icon">
 							<i class="fas fa-home"></i>
 						</span>
 					</a>
-					<a href="<?= base_url('guest/index') ?>" class="button is-large is-info" title="Guest Book">
+					<a href="<?= base_url('guest') ?>" class="button is-large is-info" title="Guest Book">
 						<span class="icon">
 							<i class="fas fa-book"></i>
 						</span>

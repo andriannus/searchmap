@@ -135,7 +135,7 @@ const guest = new Vue({
 		},
 
 		deleteArea () {
-			axios.delete('<?= base_url() ?>' + 'api/destroyArea/' + this.idArea)
+			axios.post('<?= base_url() ?>' + 'api/destroyArea/' + this.idArea)
 				.then(res => {
 					if (!res.data.success) {
 						alert('Error')

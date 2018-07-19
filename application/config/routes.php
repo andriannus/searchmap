@@ -53,5 +53,8 @@ $route['default_controller'] = 'site';
 $route['404_override'] = 'site/notfound';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['index'] = 'site/index';
+$route['map'] = 'site/map';
+$route['drawmap'] = 'site/drawmap';
 $route['area'] = 'guest/area';
 $route['place'] = 'guest/place';

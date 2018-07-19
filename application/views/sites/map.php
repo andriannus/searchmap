@@ -45,7 +45,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 		</div>
 		<footer class="card-footer">
-			<a href="<?= base_url('site/index') ?>" class="card-footer-item">Home</a>
+			<a href="<?= base_url() ?>" class="card-footer-item">Home</a>
 			<a href="<?= base_url('guest') ?>" class="card-footer-item has-text-centered">Guest Book</a>
 		</footer>
 	</div>
