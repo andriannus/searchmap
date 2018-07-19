@@ -10,6 +10,7 @@ class Site extends CI_Controller {
 		$data = [
 			'title' => 'Welcome to Search Map',
 			'navigation' => 'core/elements/navigation',
+			'menu' => 'home',
 			'page' => 'sites/index'
 		];
 

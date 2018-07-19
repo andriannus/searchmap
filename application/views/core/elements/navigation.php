@@ -5,11 +5,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div id="app">
 	<nav class="navbar is-fixed-top is-light" role="navigation" aria-label="main navigation">
 		<div class="navbar-brand">
-			<a class="navbar-item wow slideInLeft" href="<?= base_url('site') ?>" data-wow-duration="1s">
+			<a class="navbar-item wow slideInLeft" href="<?= base_url() ?>" data-wow-duration="1s">
 				SEARCH MAP
 			</a>
 
-			<a role="button" class="navbar-burger" :class="{ 'is-active': isActive }" aria-label="menu" aria-expanded="false" @click="switchMenu">
+			<a role="button" class="navbar-burger has-text-dark" :class="{ 'is-active': isActive }" aria-label="menu" aria-expanded="false" @click="switchMenu">
 				<span aria-hidden="true"></span>
 				<span aria-hidden="true"></span>
 				<span aria-hidden="true"></span>
@@ -18,15 +18,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<div class="navbar-menu" :class="{ 'is-active': isActive }">
 			<div class="navbar-start">
-				<a class="navbar-item wow slideInDown" href="<?= base_url('site') ?>" data-wow-duration="1s" data-wow-delay="0.2s">
+				<a
+					class="navbar-item wow slideInDown <?= (isset($menu) && $menu === 'home' ? 'is-active' : ''); ?>"
+					href="<?= base_url() ?>"
+					data-wow-duration="1s"
+					data-wow-delay="0.2s"
+				>
 					<i class="fas fa-home"></i>&nbsp;
 					Home
 				</a>
-				<a class="navbar-item wow slideInDown" href="<?= base_url('site/map') ?>" data-wow-duration="1s" data-wow-delay="0.4s">
+				<a class="navbar-item wow slideInDown" href="<?= base_url('map') ?>" data-wow-duration="1s" data-wow-delay="0.4s">
 					<i class="fas fa-map"></i>&nbsp;
 					Map
 				</a>
-				<a class="navbar-item wow slideInDown" href="<?= base_url('site/drawmap') ?>" data-wow-duration="1s" data-wow-delay="0.6s">
+				<a class="navbar-item wow slideInDown" href="<?= base_url('drawmap') ?>" data-wow-duration="1s" data-wow-delay="0.6s">
 					<i class="fas fa-pen"></i>&nbsp;
 					Draw Map
 				</a>
@@ -43,7 +48,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<span>Guest Book</span>
 							</a>
 
-							<a class="button is-dark" href="https://github.com/andriannus/searchmap">
+							<a class="button is-dark" href="https://github.com/andriannus/searchmap" target="_blank">
 								<span class="icon">
 									<i class="fab fa-github"></i>
 								</span>

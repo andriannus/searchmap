@@ -10,19 +10,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					Welcome to - <i class="fas fa-map"></i> Search Map
 				</h1>
 
-				<a class="button is-large wow zoomIn" href="<?= base_url('site/map') ?>" data-wow-duration="1s" data-wow-delay="1.2s">
-					<span class="icon">
-						<i class="fas fa-map-marker-alt"></i>
-					</span>
-					<span>Find Your Place Here</span>
-				</a>
-				<br><br>
-				<a class="button is-large wow zoomIn" href="<?= base_url('site/drawmap') ?>" data-wow-duration="1s" data-wow-delay="1.4s">
-					<span class="icon">
-						<i class="fas fa-pen"></i>
-					</span>
-					<span>Let's Draw a Map</span>
-				</a>
+				<div class="columns">
+					<div class="column is-6 is-offset-3">
+						<div class="columns">
+							<div class="column">
+								<a class="button is-large is-fullwidth wow zoomIn" href="<?= base_url('map') ?>" data-wow-duration="1s" data-wow-delay="1.2s">
+									<span class="icon">
+										<i class="fas fa-map-marker-alt"></i>
+									</span>
+									<span>Find Your Place Here</span>
+								</a>
+							</div>
+
+							<div class="column">
+								<a class="button is-large is-fullwidth wow zoomIn" href="<?= base_url('drawmap') ?>" data-wow-duration="1s" data-wow-delay="1.4s">
+									<span class="icon">
+										<i class="fas fa-pen"></i>
+									</span>
+									<span>Let's Draw a Map</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>						
 			</div>
 		</div>
 	</section>
