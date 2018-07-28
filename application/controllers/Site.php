@@ -17,26 +17,6 @@ class Site extends CI_Controller {
 		$this->load->view($this->app, $data);
 	}
 
-	public function map()
-	{
-		$data = [
-			'title' => 'Find Place what You Want - Search Map',
-			'page' => 'sites/map'
-		];
-
-		$this->load->view($this->app, $data);
-	}
-
-	public function drawMap()
-	{
-		$data = [
-			'title' => 'Draw Your Area - Search Map',
-			'page' => 'sites/drawmap'
-		];
-
-		$this->load->view($this->app, $data);
-	}
-
 	public function notFound()
 	{
 		$data = [

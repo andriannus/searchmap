@@ -3,45 +3,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <div id="area">
-	<section class="hero is-white is-fullheight" v-if="!areaFound">
-		<div class="hero-body">
-			<div class="container has-text-centered">
-				<p class="title"><i class="fas fa-sad-tear"></i></p>
-				<p class="subtitle">- Not Found -</p>
-				<p>
-					<a class="button is-success" href="<?= base_url('site') ?>">
-						<span class="icon">
-							<i class="fas fa-home"></i>
-						</span>
-						<span>Home</span>
-					</a>
-
-					<a class="button is-info" href="<?= base_url('guest') ?>">
-						<span class="icon">
-							<i class="fas fa-book"></i>
-						</span>
-						<span>Guest Book</span>
-					</a>
-				</p>
-			</div>
-		</div>
-	</section>
-
 	<div class="card" ref="mapCard" style="margin: 5px 0 0 5px" :style="{ display: visibleCard }">
 		<header class="card-header">
-			<p class="card-header-title" v-if="!haveId">Menus</p>
-			<p class="card-header-title" v-if="haveId">Area by - {{ name }} -</p>
+			<p class="card-header-title">Menus</p>
 		</header>
 
-		<div class="card-content" v-if="!haveId">
+		<div class="card-content">
 			<div class="content">
 				<div class="field">
-					<a href="<?= base_url() ?>" class="button is-large is-dark" title="Home">
+					<a href="<?= base_url('site') ?>" class="button is-large is-dark" title="Home">
 						<span class="icon">
 							<i class="fas fa-home"></i>
 						</span>
 					</a>
-					<a href="<?= base_url('guest') ?>" class="button is-large is-info" title="Guest Book">
+					<a href="<?= base_url('guest/area') ?>" class="button is-large is-info" title="Guest Book">
 						<span class="icon">
 							<i class="fas fa-book"></i>
 						</span>
@@ -49,27 +24,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</div>
 			</div>
 		</div>
-
-		<div class="card-content" v-if="haveId">
-			<div class="content">
-				<div class="field">
-					<p class="title">Area Name</p>
-					<p class="subtitle">{{ areaName }}</p>
-				</div>
-			</div>
-		</div>
-
-		<footer class="card-footer" v-if="haveId">
-			<a href="<?= base_url('site/index') ?>" class="card-footer-item">Home</a>
-			<a href="<?= base_url('area') ?>" class="card-footer-item has-text-centered">Back</a>
-		</footer>
 	</div>
 
 	<div class="card" ref="mapCardDelete" style="margin: 5px 0 0 5px" :style="{ display: visibleCardDelete }">
 		<header class="card-header">
-			<p class="card-header-title" v-if="!haveId">Save or Delete?</p>
+			<p class="card-header-title">Save or Delete?</p>
 		</header>
-		<div class="card-content" v-if="!haveId">
+		<div class="card-content">
 			<div class="content">
 				<div class="field" v-if="!saved">
 					<button class="button is-large is-success" title="Save Area" @click="switchModal">
@@ -95,12 +56,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 		</div>
 		<footer class="card-footer">
-			<a href="<?= base_url('site/index') ?>" class="card-footer-item">Home</a>
-			<a href="<?= base_url('guest/index') ?>" class="card-footer-item has-text-centered">Guest Book</a>
+			<a href="<?= base_url('site') ?>" class="card-footer-item">Home</a>
+			<a href="<?= base_url('guest/area') ?>" class="card-footer-item has-text-centered">Guest Book</a>
 		</footer>
 	</div>
 
-	<div id="map" ref="map" style="height: 100%; display: hidden" v-if="areaFound"></div>
+	<div id="map" ref="map" style="height: 100%; display: hidden"></div>
 
 	<!-- Modal Save -->
 	<div class="modal" :class="{ 'is-active': visibleModal }">
@@ -157,15 +118,12 @@ const area = new Vue({
 		visibleCard: 'none',
 		visibleCardDelete: 'none',
 		visibleModal: false,
-		haveId: false,
-		areaFound: true,
 		inTheProcess: false,
 		saved: false
 	}),
 	
 	mounted () {
-		// this.initMap()
-		this.fetchData()
+		this.initMap()
 	},
 
 	methods: {
@@ -290,120 +248,6 @@ const area = new Vue({
 				.catch(err => {
 					console.log(err)
 				})
-		},
-
-		fetchData () {
-			const searchParam = new URLSearchParams(window.location.search)
-			let id = searchParam.get('id')
-
-			if (id === null) {
-				this.initMap()
-
-			} else {
-				axios.get('<?= base_url() ?>' + 'api/getOneArea/' + id)
-					.then(res => {
-						this.initMap()
-						this.drawingManager.setMap(null)
-
-						this.name = res.data.data.name
-						this.areaName = res.data.data.area_name
-
-						let area = res.data.data
-						let type = area.area_type
-
-						if (type === 'polyline') {
-							let polyline = JSON.parse(area.area)
-							let arrayCoord = []
-							for (let i=0; i<polyline.length; i++) {
-								let coord = {
-									lat: parseFloat(polyline[i].split(', ')[0]),
-									lng: parseFloat(polyline[i].split(', ')[1])
-								}
-								arrayCoord.push(coord)
-							}
-
-							console.log(arrayCoord)
-
-							this.polyline = new google.maps.Polyline({
-								path: arrayCoord,
-								map: this.map
-							})
-
-							const latLng = new google.maps.LatLng(parseFloat(polyline[0].split(', ')[0]), parseFloat(polyline[0].split(', ')[1]))
-
-							this.map.setCenter(latLng)
-							this.map.setZoom(13)
-						}
-
-						if (type === 'rectangle') {
-							let rectangle = JSON.parse(area.area)
-							this.rectangle = new google.maps.Rectangle({
-								bounds: {
-									north: rectangle.north,
-									south: rectangle.south,
-									east: rectangle.east,
-									west: rectangle.west
-								},
-								map: this.map
-							})
-
-							const latLng = new google.maps.LatLng(rectangle.south, rectangle.west)
-
-							this.map.setCenter(latLng)
-							this.map.setZoom(15)
-						}
-
-						if (type === 'circle') {
-							let circle = JSON.parse(area.area)
-							this.circle = new google.maps.Circle({
-								center: circle.center,
-								radius: circle.radius,
-								map: this.map
-							})
-
-							const latLng = new google.maps.LatLng(circle.center.lat, circle.center.lng)
-
-							this.map.setCenter(latLng)
-							this.map.setZoom(15)
-						}
-
-						if (type === 'polygon') {
-							let polygon = JSON.parse(area.area)
-							let arrayCoord = []
-							for (let i=0; i<polygon.length; i++) {
-								let coord = {
-									lat: parseFloat(polygon[i].split(', ')[0]),
-									lng: parseFloat(polygon[i].split(', ')[1])
-								}
-								arrayCoord.push(coord)
-							}
-
-							arrayCoord.push({
-								lat: parseFloat(polygon[0].split(', ')[0]),
-								lng: parseFloat(polygon[0].split(', ')[1])
-							})
-
-							this.polygon = new google.maps.Polygon({
-								paths: arrayCoord,
-								map: this.map
-							})
-
-							const latLng = new google.maps.LatLng(parseFloat(polygon[0].split(', ')[0]), parseFloat(polygon[0].split(', ')[1]))
-
-							this.map.setCenter(latLng)
-							this.map.setZoom(13)
-						}
-
-						this.haveId = true
-
-					})
-					.catch(err => {
-						if (err.response.status === 404) {
-							this.areaFound = false
-						}
-						console.log(err)
-					})
-			}
 		},
 
 		switchModal () {

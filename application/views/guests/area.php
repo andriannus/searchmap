@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="column is-8 is-offset-2 wow zoomIn" data-wow-duration="1s" data-wow-delay="0.6s">
 				<p class="title">{{ count }} Recommendations</p>
 				<p class="subtitle">
-					<a href="<?= base_url('place'); ?>" class="button is-primary is-outlined">
+					<a href="<?= base_url('guest/place'); ?>" class="button is-primary is-outlined">
 						<span class="icon">
 							<i class="fas fa-map-marker-alt"></i>
 						</span>
@@ -58,7 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<td>
 									<a
 										class="button is-link"
-										:href="'<?= base_url() ?>' + 'site/drawmap?id=' + guest.id"
+										:href="'<?= base_url() ?>' + 'draw/' + guest.id"
 									>
 										<span class="icon">
 											<i class="fas fa-eye"></i>

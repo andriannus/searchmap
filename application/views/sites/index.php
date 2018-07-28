@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</div>
 
 							<div class="column">
-								<a class="button is-large is-fullwidth wow zoomIn" href="<?= base_url('drawmap') ?>" data-wow-duration="1s" data-wow-delay="1.4s">
+								<a class="button is-large is-fullwidth wow zoomIn" href="<?= base_url('draw') ?>" data-wow-duration="1s" data-wow-delay="1.4s">
 									<span class="icon">
 										<i class="fas fa-pen"></i>
 									</span>

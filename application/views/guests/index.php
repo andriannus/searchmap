@@ -22,14 +22,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					Please Select the Guest Book Menus Below
 				</p>
 
-				<a href="<?= base_url('place') ?>" class="button is-large wow zoomIn" data-wow-duration="1s" data-wow-delay="0.4s">
+				<a href="<?= base_url('guest/place') ?>" class="button is-large wow zoomIn" data-wow-duration="1s" data-wow-delay="0.4s">
 					<span class="icon">
 						<i class="fas fa-map-marker-alt"></i>
 					</span>
 					<span>Place</span>
 				</a>
 
-				<a href="<?= base_url('area') ?>" class="button is-large wow zoomIn" data-wow-duration="1s" data-wow-delay="0.6s">
+				<a href="<?= base_url('guest/area') ?>" class="button is-large wow zoomIn" data-wow-duration="1s" data-wow-delay="0.6s">
 					<span class="icon">
 						<i class="fas fa-map"></i>
 					</span>

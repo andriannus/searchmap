@@ -18,8 +18,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="https://unpkg.com/vue@2.5.16/dist/vue.min.js"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="https://momentjs.com/downloads/moment.min.js"></script>
-
-	<!-- Replace 'API_KEY' with 'Your API_KEY' -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&libraries=places,drawing"></script>
 
 	<style>

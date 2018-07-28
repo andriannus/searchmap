@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 				<p class="title">{{ count }} Recommendations</p>
 				<p class="subtitle">
-					<a href="<?= base_url('area'); ?>" class="button is-primary is-outlined">
+					<a href="<?= base_url('guest/area'); ?>" class="button is-primary is-outlined">
 						<span class="icon">
 							<i class="fas fa-map"></i>
 						</span>
@@ -58,7 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<td>
 									<a
 										class="button is-link"
-										:href="'<?= base_url() ?>' + 'site/map?id=' + guest.id"
+										:href="'<?= base_url() ?>' + 'map/' + guest.id"
 									>
 										<span class="icon">
 											<i class="fas fa-eye"></i>

@@ -31,7 +31,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<i class="fas fa-map"></i>&nbsp;
 					Map
 				</a>
-				<a class="navbar-item wow slideInDown" href="<?= base_url('drawmap') ?>" data-wow-duration="1s" data-wow-delay="0.6s">
+				<a class="navbar-item wow slideInDown" href="<?= base_url('draw') ?>" data-wow-duration="1s" data-wow-delay="0.6s">
 					<i class="fas fa-pen"></i>&nbsp;
 					Draw Map
 				</a>

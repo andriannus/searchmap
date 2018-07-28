@@ -14,12 +14,12 @@ class Api extends CI_Controller {
 		$place = $this->guest->getAllPlaces()->result();
 
 		return $this->output
-					->set_status_header(200)
-					->set_output(json_encode([
-							'success' => true,
-							'message' => 'Success get all recommend place',
-							'data' => $place
-						]));
+								->set_status_header(200)
+								->set_output(json_encode([
+										'success' => true,
+										'message' => 'Success get all recommend place',
+										'data' => $place
+									]));
 	}
 
 	public function getAllAreas()
@@ -27,12 +27,12 @@ class Api extends CI_Controller {
 		$area = $this->guest->getAllAreas()->result();
 
 		return $this->output
-					->set_status_header(200)
-					->set_output(json_encode([
-							'success' => true,
-							'message' => 'Success get all recommend area',
-							'data' => $area
-						]));
+								->set_status_header(200)
+								->set_output(json_encode([
+										'success' => true,
+										'message' => 'Success get all recommend area',
+										'data' => $area
+									]));
 	}
 
 	public function getOnePlace($id)
@@ -41,20 +41,20 @@ class Api extends CI_Controller {
 
 		if ($place === null) {
 			return $this->output
-						->set_status_header(404)
-						->set_output(json_encode([
-								'success' => false,
-								'message' => 'Not found'
-							]));
+									->set_status_header(404)
+									->set_output(json_encode([
+											'success' => false,
+											'message' => 'Not found'
+										]));
 
 		} else {
 			return $this->output
-						->set_status_header(200)
-						->set_output(json_encode([
-								'success' => true,
-								'message' => 'Success get one place',
-								'data' => $place
-							]));
+									->set_status_header(200)
+									->set_output(json_encode([
+											'success' => true,
+											'message' => 'Success get one place',
+											'data' => $place
+										]));
 		}
 	}
 
@@ -64,20 +64,20 @@ class Api extends CI_Controller {
 
 		if ($area === null) {
 			return $this->output
-						->set_status_header(404)
-						->set_output(json_encode([
-								'success' => false,
-								'message' => 'Not found'
-							]));
+									->set_status_header(404)
+									->set_output(json_encode([
+											'success' => false,
+											'message' => 'Not found'
+										]));
 
 		} else {
 			return $this->output
-						->set_status_header(200)
-						->set_output(json_encode([
-								'success' => true,
-								'message' => 'Success get one area',
-								'data' => $area
-							]));
+									->set_status_header(200)
+									->set_output(json_encode([
+											'success' => true,
+											'message' => 'Success get one area',
+											'data' => $area
+										]));
 		}
 	}
 
@@ -101,19 +101,19 @@ class Api extends CI_Controller {
 
 		if (!$result) {
 			return $this->output
-						->set_status_header(500)
-						->set_output(json_encode([
-								'success' => false,
-								'message' => 'Error'
-							]));
+									->set_status_header(500)
+									->set_output(json_encode([
+											'success' => false,
+											'message' => 'Error'
+										]));
 
 		} else {
 			return $this->output
-						->set_status_header(201)
-						->set_output(json_encode([
-								'success' => true,
-								'message' => 'Success save place'
-							]));
+									->set_status_header(201)
+									->set_output(json_encode([
+											'success' => true,
+											'message' => 'Success save place'
+										]));
 		}
 	}
 
@@ -135,19 +135,19 @@ class Api extends CI_Controller {
 
 		if (!$result) {
 			return $this->output
-						->set_status_header(500)
-						->set_output(json_encode([
-								'success' => false,
-								'message' => 'Error'
-							]));
+									->set_status_header(500)
+									->set_output(json_encode([
+											'success' => false,
+											'message' => 'Error'
+										]));
 
 		} else {
 			return $this->output
-						->set_status_header(201)
-						->set_output(json_encode([
-								'success' => true,
-								'message' => 'Success save place'
-							]));
+									->set_status_header(201)
+									->set_output(json_encode([
+											'success' => true,
+											'message' => 'Success save place'
+										]));
 		}
 	}
 
@@ -157,19 +157,19 @@ class Api extends CI_Controller {
 
 		if (!$result) {
 			return $this->output
-						->set_status_header(500)
-						->set_output(json_encode([
-								'success' => false,
-								'message' => 'Error'
-							]));
+									->set_status_header(500)
+									->set_output(json_encode([
+											'success' => false,
+											'message' => 'Error'
+										]));
 
 		} else {
 			return $this->output
-						->set_status_header(201)
-						->set_output(json_encode([
-								'success' => true,
-								'message' => 'Success delete place'
-							]));
+									->set_status_header(201)
+									->set_output(json_encode([
+											'success' => true,
+											'message' => 'Success delete place'
+										]));
 		}
 	}
 
@@ -179,19 +179,19 @@ class Api extends CI_Controller {
 
 		if (!$result) {
 			return $this->output
-						->set_status_header(500)
-						->set_output(json_encode([
-								'success' => false,
-								'message' => 'Error'
-							]));
+									->set_status_header(500)
+									->set_output(json_encode([
+											'success' => false,
+											'message' => 'Error'
+										]));
 
 		} else {
 			return $this->output
-						->set_status_header(201)
-						->set_output(json_encode([
-								'success' => true,
-								'message' => 'Success delete area'
-							]));
+									->set_status_header(201)
+									->set_output(json_encode([
+											'success' => true,
+											'message' => 'Success delete area'
+										]));
 		}
 	}
 }
