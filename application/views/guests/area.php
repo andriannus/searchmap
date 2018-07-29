@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<span class="icon">
 							<i class="fas fa-map-marker-alt"></i>
 						</span>
-						<span>Place</span>
+						<span>Places</span>
 					</a>
 				</p>
 				

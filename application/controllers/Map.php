@@ -41,6 +41,11 @@ class Map extends CI_Controller {
 
 	public function all()
 	{
-		echo "All";
+		$data = [
+			'title' => 'Find Place what You Want - Search Map',
+			'page' => 'maps/all'
+		];
+
+		$this->load->view($this->app, $data);
 	}
 }

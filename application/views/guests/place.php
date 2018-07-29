@@ -25,7 +25,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<span class="icon">
 							<i class="fas fa-map"></i>
 						</span>
-						<span>Area</span>
+						<span>Areas</span>
+					</a>
+
+					<a href="<?= base_url('map/all'); ?>" class="button is-link is-outlined">
+						<span class="icon">
+							<i class="fas fa-eye"></i>
+						</span>
+						<span>Show All</span>
 					</a>
 				</p>
 				<div class="table-responsive">
