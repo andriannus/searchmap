@@ -1,9 +1,9 @@
 # Search Map
-Find places and Draw on Map using Google Maps API
+> Find places and Draw on Map using Google Maps API
 
 ## What's New?
-1. Draw on Map (Polyline, Rectangle, Circle, or Polygon)
-2. Animation
+1. Add comments to help
+2. Show all place
 
 ## Tools
 1. PHP - CodeIgniter `3.1.9`
@@ -24,8 +24,10 @@ Plase visit [Google Developers](https://developers.google.com/maps/documentation
 ## How To Run?
 Plase visit `http://localhost/searchmap/site`
 
-## Donate
-Plase give me a Star! :)
+## References
+1. Vue.js - [Link](https://vuejs.org)
+2. Bulma - [Link](https://bulma.io)
+3. Moment.js - [Link](https://momentjs.com)
 
 ## License
 [MIT](https://github.com/andriannus/searchmap/blob/master/LICENSE)
