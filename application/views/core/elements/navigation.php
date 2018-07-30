@@ -63,8 +63,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <script>
+/*
+|--------------------------------------------------------------------------
+| Vue.js
+|--------------------------------------------------------------------------
+|
+| new Vue({}) -> Instance Vue.js
+|
+| Digunakan untuk mengawali Vue.js
+| 
+| el 			-> Target yang akan dimanupulasi oleh Vue.js
+| data 		-> Data (variabel) pada Vue.js
+| methods	-> Menampung Method yang akan digunakan
+| 
+| {{}}		-> Menampilkan data (variabel)
+| @click	-> Melakukan method tertentu ketika bagian tersebut diklik
+|
+| Untuk lebih lengkapnya, silahkan kunjungi:
+| https://vue.js.org
+|
+*/
+
 const app = new Vue({
-	el: '#app',
+	el: '#app', // tag HTML dengan id = app
 	data: () => ({
 		isActive: false
 	}),

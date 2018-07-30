@@ -101,6 +101,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <script>
+/*
+|--------------------------------------------------------------------------
+| Vue.js
+|--------------------------------------------------------------------------
+|
+| new Vue({}) -> Instance Vue.js
+|
+| Digunakan untuk mengawali Vue.js
+| 
+| el 			-> Target yang akan dimanupulasi oleh Vue.js
+| data 		-> Data (variabel) pada Vue.js
+| methods	-> Menampung Method yang akan digunakan
+| 
+| {{}}		-> Menampilkan data (variabel)
+| @click	-> Melakukan method tertentu ketika bagian tersebut diklik
+|
+| Untuk lebih lengkapnya, silahkan kunjungi:
+| https://vue.js.org
+|
+*/
+
 const area = new Vue({
 	el: '#area',
 	data: () => ({
@@ -122,7 +143,7 @@ const area = new Vue({
 		saved: false
 	}),
 	
-	mounted () {
+	mounted () { // Silahkan lihat LifeCycle Vue.js
 		this.initMap()
 	},
 
@@ -130,13 +151,14 @@ const area = new Vue({
 		initMap () {
 			// 'area' -> 'const app = new Vue({})'
 
-			this.map = new google.maps.Map(this.$refs.map, {
+			// Menyimpan data map pada Vue.js
+			this.map = new google.maps.Map(this.$refs.map // atribut 'ref' dengan value 'map', {
 				center: {
 					lat: -6.595038,
 					lng: 106.816635
 				},
 				zoom: 13,
-				disableDefaultUI: true
+				disableDefaultUI: true // Menghilangkan tombol - tombol default Google Maps
 			});
 
 			const drawingModeOptions = {
@@ -146,6 +168,7 @@ const area = new Vue({
 			this.drawingManager = new google.maps.drawing.DrawingManager({
 				drawingMode: google.maps.drawing.OverlayType.POLYLINE,
 				drawingControlOptions: {
+					// Shape apa saja yang dapat dibuat
 					drawingModes: ['polyline', 'rectangle', 'circle', 'polygon',]
 				},
 				polylineOptions: drawingModeOptions,
@@ -155,6 +178,7 @@ const area = new Vue({
 				map: this.map
 			})
 
+			// Ketika shape (apapun) selesai dibuat
 			google.maps.event.addListener(this.drawingManager, 'overlaycomplete', function (shape) {
 				area.drawingManager.setMap(null),
 				area.newShape = shape.overlay,
@@ -162,6 +186,7 @@ const area = new Vue({
 				area.visibleCardDelete = 'block'
 			})
 
+			// Ketika polyline selesai dibuat
 			google.maps.event.addListener(this.drawingManager, 'polylinecomplete', function (polyline) {
 				let arrayPolyline = []
 				let data = polyline.getPath().getArray()
@@ -174,6 +199,7 @@ const area = new Vue({
 				area.areaLoc = JSON.stringify(arrayPolyline)
 			})
 
+			// Ketika rectangle selesai dibuat
 			google.maps.event.addListener(this.drawingManager, 'rectanglecomplete', function (rectangle) {
 				let jsonRectangle = {
 					west: rectangle.bounds.b.b,
@@ -183,9 +209,10 @@ const area = new Vue({
 				}
 
 				area.areaType = 'rectangle'
-				area.areaLoc = JSON.stringify(jsonRectangle)
+				area.areaLoc = JSON.stringify(jsonRectangle) // Mengubah Array/Object menjadi sebuah String
 			})
 
+			// Ketika circle selesai dibuat
 			google.maps.event.addListener(this.drawingManager, 'circlecomplete', function (circle) {
 				let jsonCircle = {
 					center: {
@@ -196,9 +223,10 @@ const area = new Vue({
 				}
 
 				area.areaType = 'circle'
-				area.areaLoc = JSON.stringify(jsonCircle)
+				area.areaLoc = JSON.stringify(jsonCircle) // Mengubah Array/Object menjadi sebuah String
 			})
 
+			// Ketika polygon selesai dibuat
 			google.maps.event.addListener(this.drawingManager, 'polygoncomplete', function (polygon) {
 				let arrayPolygon = []
 				let data = polygon.getPath().getArray()
@@ -208,9 +236,11 @@ const area = new Vue({
 				}
 
 				area.areaType = 'polygon'
-				area.areaLoc = JSON.stringify(arrayPolygon)
+				area.areaLoc = JSON.stringify(arrayPolygon) // Mengubah Array/Object menjadi sebuah String
 			})
 
+			// Silahkan lihat tag HTML dengan atribut 'ref' = 'buttonRemove'
+			// Ketika tag tersebut diklik
 			google.maps.event.addDomListener(this.$refs.buttonRemove, 'click', function () {
 				area.drawingManager.setMap(area.map),
 				area.newShape.setMap(null),
@@ -218,27 +248,32 @@ const area = new Vue({
 				area.visibleCardDelete = 'none'
 			})
 
-			let card = this.$refs.mapCard // Get mapCard element
+			let card = this.$refs.mapCard // Silahkan lihat tag HTML dengan atribut 'ref' = 'mapCard'
 			let cardDelete = this.$refs.mapCardDelete
 			let button = this.$refs.buttonSave
 
+			// Menampilkan card atau cardDelete pada Map
 			this.map.controls[google.maps.ControlPosition.LEFT_TOP].push(card);
 			this.map.controls[google.maps.ControlPosition.LEFT_TOP].push(cardDelete);
 
+			// Ketika Maps selesai dimuat
 			google.maps.event.addListenerOnce(this.map, 'tilesloaded', function () {
 				area.visibleCard = 'block'
 			})
 		},
 
+		// Menyimpan data area
 		saveArea () {
 			this.inTheProcess = true
 
 			let data = 	'name=' + this.name + 
-						'&area_name=' + this.areaName +
-						'&area_type=' + this.areaType +
-						'&area=' + this.areaLoc
+									'&area_name=' + this.areaName +
+									'&area_type=' + this.areaType +
+									'&area=' + this.areaLoc
 
+			// Axios post (sama seperti jQuery AJAX)
 			axios.post('<?= base_url() ?>' + 'api/storeArea', data)
+				// then / catch -> Promise JavaScript
 				.then(res => {
 					this.inTheProcess = false
 					this.visibleModal = false

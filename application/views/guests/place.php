@@ -61,6 +61,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<tr>
 								<td>{{ guest.name }}</td>
 								<td>{{ guest.place }}</td>
+
+								<!-- Data yang ditampilkan akan difilter terlebih dahulu -->
 								<td>{{ guest.date | moment }}</td>
 								<td>
 									<a
@@ -112,6 +114,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <script>
+/*
+|--------------------------------------------------------------------------
+| Vue.js
+|--------------------------------------------------------------------------
+|
+| new Vue({}) -> Instance Vue.js
+|
+| Digunakan untuk mengawali Vue.js
+| 
+| el 			-> Target yang akan dimanupulasi oleh Vue.js
+| data 		-> Data (variabel) pada Vue.js
+| methods	-> Menampung Method yang akan digunakan
+| 
+| {{}}		-> Menampilkan data (variabel)
+| @click	-> Melakukan method tertentu ketika bagian tersebut diklik
+|
+| Untuk lebih lengkapnya, silahkan kunjungi:
+| https://vue.js.org
+|
+*/
+
 const guest = new Vue({
 	el: '#guest',
 	data: () => ({
@@ -127,6 +150,7 @@ const guest = new Vue({
 	},
 
 	methods: {
+		// Method untuk menampilkan data tempat
 		fetchData () {
 			this.loading = true
 
@@ -141,6 +165,7 @@ const guest = new Vue({
 				})
 		},
 
+		// Method untuk menghapus tempat
 		deletePlace () {
 			axios.post('<?= base_url() ?>' + 'api/destroyPlace/' + this.idPlace)
 				.then(res => {
@@ -148,7 +173,7 @@ const guest = new Vue({
 						alert('Error')
 
 					} else {
-						location.reload()
+						location.reload() // Reload halaman
 					}
 				})
 				.catch(err => {
@@ -156,6 +181,7 @@ const guest = new Vue({
 				})
 		},
 
+		// Method untuk menampilkan konfirmasi hapus data
 		switchModal (id) {
 			if (id === null) {
 				this.idPlace = ''
@@ -168,7 +194,9 @@ const guest = new Vue({
 		}
 	},
 
+	// Filter data tertentu
 	filters: {
+		// Output akan diubah dengan bantuan dari Moment.js
 		moment: (date) => moment(date).fromNow()
 	}
 })

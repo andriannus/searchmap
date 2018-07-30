@@ -17,6 +17,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <script>
+/*
+|--------------------------------------------------------------------------
+| Vue.js
+|--------------------------------------------------------------------------
+|
+| new Vue({}) -> Instance Vue.js
+|
+| Digunakan untuk mengawali Vue.js
+| 
+| el 			-> Target yang akan dimanupulasi oleh Vue.js
+| data 		-> Data (variabel) pada Vue.js
+| methods	-> Menampung Method yang akan digunakan
+| 
+| {{}}		-> Menampilkan data (variabel)
+| @click	-> Melakukan method tertentu ketika bagian tersebut diklik
+|
+| Untuk lebih lengkapnya, silahkan kunjungi:
+| https://vue.js.org
+|
+*/
+
 const app = new Vue({
 	el: '#app',
 	data: () => ({
@@ -50,27 +71,37 @@ const app = new Vue({
 				maxWidth: 231
 			})
 			
+			// Ketika Maps berhasil dimuat
 			google.maps.event.addListenerOnce(this.map, 'tilesloaded', function () {
 				app.visibleCard = 'block'
 			})
 
+			// Menjalankan method tertentu
 			this.fetchData()
 		},
 
 		fetchData () {
+			// Axios get (sama seperti jQuery AJAX)
+			// Digunakan untuk mengambil data dari Api Controller
 			axios.get('<?= base_url() ?>' + 'api/getAllPlaces')
 				.then(res => {
 					const places = res.data.data
 
+					// Perulangan berdasarkan data pada database
 					for (let i=0; i<places.length; i++) {
 						this.infoWindowContent[i] = this.getInfoWindowContent(places[i])
+
+						// Menentukan koordinat dengan Google Maps LatLng
 						let latLng = new google.maps.LatLng(places[i].lat, places[i].lng)
 
+						// Menampilkan Marker
 						this.marker[i] = new google.maps.Marker({
 							position: latLng,
 							map: this.map
 						})
 
+						// app.---
+						// Digunakan untuk menentukan nilai dari variabel Vue.js dari Google Maps
 						this.marker[i].addListener('click', function () {
 							app.infoWindow.setContent(app.infoWindowContent[i])
 							app.infoWindow.open(app.map, app.marker[i])
@@ -80,10 +111,11 @@ const app = new Vue({
 					}
 				})
 				.catch(err => {
-
+					alert('Terjadi Error. Silahkan refresh halaman')
 				})
 		},
 
+		// Method untuk membuat isi dari InfoWindow
 		getInfoWindowContent (loc) {
 			let content = `
 										<div id="infowindow">
@@ -92,7 +124,7 @@ const app = new Vue({
 										</div>	
 										`
 
-			return content
+			return content // Mengembalikan nilai dari variabel
 		}
 	}
 })

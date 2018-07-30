@@ -27,10 +27,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <script>
+/*
+|--------------------------------------------------------------------------
+| Vue.js
+|--------------------------------------------------------------------------
+|
+| new Vue({}) -> Instance Vue.js
+|
+| Digunakan untuk mengawali Vue.js
+| 
+| el 			-> Target yang akan dimanupulasi oleh Vue.js
+| data 		-> Data (variabel) pada Vue.js
+| methods	-> Menampung Method yang akan digunakan
+| 
+| {{}}		-> Menampilkan data (variabel)
+| @click	-> Melakukan method tertentu ketika bagian tersebut diklik
+|
+| Untuk lebih lengkapnya, silahkan kunjungi:
+| https://vue.js.org
+|
+*/
+
 const area = new Vue({
 	el: '#area',
 	data: () => ({
-		id: <?= $area->id ?>,
+		id: <?= $area->id ?>, // Didapatkan dari Controller,
 		map: '',
 		circle: '',
 		rectangle: '',
@@ -44,7 +65,6 @@ const area = new Vue({
 	}),
 	
 	mounted () {
-		// this.initMap()
 		this.fetchData()
 	},
 
@@ -66,9 +86,11 @@ const area = new Vue({
 		},
 
 		fetchData () {
+			// Axios get (sama seperti jQuery AJAX)
+			// Digunakan untuk mengambil data dari Api Controller
 			axios.get('<?= base_url() ?>' + 'api/getOneArea/' + this.id)
 				.then(res => {
-					this.initMap()
+					this.initMap() // Menjalankan method initMap
 
 					this.name = res.data.data.name
 					this.areaName = res.data.data.area_name
@@ -76,6 +98,7 @@ const area = new Vue({
 					let area = res.data.data
 					let type = area.area_type
 
+					// Jika tipe shape polyline
 					if (type === 'polyline') {
 						let polyline = JSON.parse(area.area)
 						let arrayCoord = []
@@ -100,6 +123,7 @@ const area = new Vue({
 						this.map.setZoom(13)
 					}
 
+					// Jika tipe shape rectangle
 					if (type === 'rectangle') {
 						let rectangle = JSON.parse(area.area)
 						this.rectangle = new google.maps.Rectangle({
@@ -118,6 +142,7 @@ const area = new Vue({
 						this.map.setZoom(15)
 					}
 
+					// Jika tipe shape circle
 					if (type === 'circle') {
 						let circle = JSON.parse(area.area)
 						this.circle = new google.maps.Circle({
@@ -132,9 +157,11 @@ const area = new Vue({
 						this.map.setZoom(15)
 					}
 
+					// Jika tipe shape polygon
 					if (type === 'polygon') {
-						let polygon = JSON.parse(area.area)
+						let polygon = JSON.parse(area.area) // Mengubah string menjadi Array/Object
 						let arrayCoord = []
+
 						for (let i=0; i<polygon.length; i++) {
 							let coord = {
 								lat: parseFloat(polygon[i].split(', ')[0]),
@@ -153,6 +180,8 @@ const area = new Vue({
 							map: this.map
 						})
 
+						// Google Maps LatLng
+						// split digunakan untuk memisahkan sebuah string berdasarkan kondisi pada parameternya
 						const latLng = new google.maps.LatLng(parseFloat(polygon[0].split(', ')[0]), parseFloat(polygon[0].split(', ')[1]))
 
 						this.map.setCenter(latLng)
@@ -160,16 +189,10 @@ const area = new Vue({
 					}
 
 					this.haveId = true
-
 				})
 				.catch(err => {
 					console.log(err)
 				})
-		},
-
-		switchModal () {
-			this.name = ''
-			this.visibleModal = !this.visibleModal
 		}
 	}
 })

@@ -22,9 +22,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <script>
+/*
+|--------------------------------------------------------------------------
+| Vue.js
+|--------------------------------------------------------------------------
+|
+| new Vue({}) -> Instance Vue.js
+|
+| Digunakan untuk mengawali Vue.js
+| 
+| el 			-> Target yang akan dimanupulasi oleh Vue.js
+| data 		-> Data (variabel) pada Vue.js
+| methods	-> Menampung Method yang akan digunakan
+| 
+| {{}}		-> Menampilkan data (variabel)
+| @click	-> Melakukan method tertentu ketika bagian tersebut diklik
+|
+| Untuk lebih lengkapnya, silahkan kunjungi:
+| https://vue.js.org
+|
+*/
+
 const app = new Vue({
+
+	// app.--- Menuju kepada Vue.js
+
 	el: '#app',
 	data: () => ({
+		// Default data didapatkan dari Controller
 		name: '<?= $place->name ?>',
 		placeName: '<?= $place->place ?>',
 		placeAddress: '<?= $place->address ?>',
@@ -40,6 +65,7 @@ const app = new Vue({
 
 	methods: {
 		initMap () {
+			// Google Maps LatLng
 			const latLng = new google.maps.LatLng(this.placeLat, this.placeLng)
 
 			const map = new google.maps.Map(this.$refs.map, {
@@ -52,28 +78,34 @@ const app = new Vue({
 
 			map.controls[google.maps.ControlPosition.LEFT_TOP].push(card);
 
+			// Google Maps InfoWindow (pop up pada marker)
 			const infowindow = new google.maps.InfoWindow({
 				maxWidth: 231
 			});
 
+			// Google Maps Marker
 			const marker = new google.maps.Marker({
 				map: map,
 				position: latLng,
 				anchorPoint: new google.maps.Point(0, -29)
 			});
 
+			// Isi dari InfoWindow
 			let infowindowContent = this.$refs.mapInfoWindow
 			infowindow.setContent(infowindowContent)
 
+			// Show InfoWindow
 			this.visibleInfoWindow = 'inline'
 			infowindow.open(map, marker)
 
+			// Ketika Marker diklik
 			marker.addListener('click', function () {
 				infowindow.open(map, marker)
 			})
 			
+			// Ketika Maps selesai dimuat
 			google.maps.event.addListenerOnce(map, 'tilesloaded', function () {
-				app.visibleCard = 'block'
+				app.visibleCard = 'block' // Menentukan nilai pada variabel Vue.js
 			})
 		}
 	}

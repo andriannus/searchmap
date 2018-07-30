@@ -1,10 +1,21 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/*
+|--------------------------------------------------------------------------
+| Site Controller
+|--------------------------------------------------------------------------
+|
+| Default Controller
+|
+*/
+
 class Site extends CI_Controller {
 
+	// Menampung file layout
 	public $app = 'core/layouts/app';
 
+	// Menampilkan halaman awal
 	public function index()
 	{
 		$data = [
@@ -17,6 +28,7 @@ class Site extends CI_Controller {
 		$this->load->view($this->app, $data);
 	}
 
+	// Menampilkan halaman tidak ditemukan
 	public function notFound()
 	{
 		$data = [

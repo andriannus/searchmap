@@ -72,6 +72,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <script>
+/*
+|--------------------------------------------------------------------------
+| Vue.js
+|--------------------------------------------------------------------------
+|
+| new Vue({}) -> Instance Vue.js
+|
+| Digunakan untuk mengawali Vue.js
+| 
+| el 			-> Target yang akan dimanupulasi oleh Vue.js
+| data 		-> Data (variabel) pada Vue.js
+| methods	-> Menampung Method yang akan digunakan
+| 
+| {{}}		-> Menampilkan data (variabel)
+| @click	-> Melakukan method tertentu ketika bagian tersebut diklik
+|
+| Untuk lebih lengkapnya, silahkan kunjungi:
+| https://vue.js.org
+|
+*/
+
 const app = new Vue({
 	el: '#app',
 	data: () => ({
@@ -104,19 +125,21 @@ const app = new Vue({
 				disableDefaultUI: true
 			});
 
-			let card = this.$refs.mapCard // Get mapCard element
-			let input = this.$refs.mapInput // Get mapInput element
+			// Membuat variabel berdasarkan tag HTML dengan atribut 'ref' = '...'
+			let card = this.$refs.mapCard
+			let input = this.$refs.mapInput
 			let button = this.$refs.buttonSave
 
 			map.controls[google.maps.ControlPosition.LEFT_TOP].push(card);
-			// map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(button);
 
+			// Google Maps Autocomplete
 			const autocomplete = new google.maps.places.Autocomplete(input)
 
 			const infowindow = new google.maps.InfoWindow({
 				maxWidth: 231
 			});
 
+			// Google Maps Marker
 			const marker = new google.maps.Marker({
 				map: map,
 				anchorPoint: new google.maps.Point(0, -29)
@@ -127,6 +150,7 @@ const app = new Vue({
 
 			autocomplete.bindTo('bounds', map)
 
+			// Ketika tempat berubah
 			autocomplete.addListener('place_changed', function () {
 				app.saved = false
 
@@ -149,6 +173,7 @@ const app = new Vue({
 				marker.setPosition(place.geometry.location)
 				marker.setVisible(true)
 
+				// Menentukan nilai variabel Vue.js
 				app.placeName = place.name
 				app.placeAddress = place.formatted_address
 				app.placeLat = place.geometry.location.lat()
@@ -158,15 +183,18 @@ const app = new Vue({
 				infowindow.open(map, marker)
 			});
 
+			// Ketika Marker diklik
 			marker.addListener('click', function () {
 				infowindow.open(map, marker)
 			})
 			
+			// Ketika Maps berhasil dimuat
 			google.maps.event.addListenerOnce(map, 'tilesloaded', function () {
 				app.visibleCard = 'block'
 			})
 		},
 
+		// Method untuk menyimpan tempat
 		savePlace () {
 			this.inTheProcess = true
 
@@ -176,6 +204,8 @@ const app = new Vue({
 									'&lat=' + this.placeLat + 
 									'&lng=' + this.placeLng
 
+			// Axios post (sama seperti jQuery AJAX)
+			// Digunakan untuk menyimpan data ke database
 			axios.post('<?= base_url() ?>' + 'api/storePlace', data)
 				.then(res => {
 					this.inTheProcess = false
@@ -187,6 +217,7 @@ const app = new Vue({
 				})
 		},
 
+		// Method untuk mengatur pop up Modal
 		switchModal () {
 			this.name = ''
 			this.visibleModal = !this.visibleModal
