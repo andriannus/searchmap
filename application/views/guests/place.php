@@ -15,8 +15,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</section>
 
-	<section class="section">
-		<div class="columns" v-if="!loading">
+	<section class="section" v-if="!loading && count > 0">
+		<div class="columns">
 			<div class="column is-8 is-offset-2 wow zoomIn" data-wow-duration="1s" data-wow-delay="0.6s">
 
 				<p class="title">{{ count }} Recommendations</p>
@@ -90,6 +90,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 		</div>
 	</section>
+
+	<div class="has-text-centered" v-if="!loading && count < 1">
+		<p class="title">
+			<i class="fas fa-frown"></i>
+		</p>
+		<p class="subtitle">
+			No Recomendations
+		</p>
+		<a class="button is-link" href="<?= base_url('map') ?>">
+			Add Place
+		</a>
+	</div>
 
 	<div class="has-text-centered" v-if="loading">
 		<p class="title">
