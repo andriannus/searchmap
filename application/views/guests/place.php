@@ -99,7 +99,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			No Recomendations
 		</p>
 		<a class="button is-link" href="<?= base_url('map') ?>">
-			Add Place
+			Add New Place
+		</a>
+
+		<a class="button is-link is-outlined" href="<?= base_url('guest/area') ?>">
+			Areas
 		</a>
 	</div>
 
