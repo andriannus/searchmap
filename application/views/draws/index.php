@@ -152,7 +152,7 @@ const area = new Vue({
 			// 'area' -> 'const app = new Vue({})'
 
 			// Menyimpan data map pada Vue.js
-			this.map = new google.maps.Map(this.$refs.map // atribut 'ref' dengan value 'map', {
+			this.map = new google.maps.Map(this.$refs.map, { // atribut 'ref' dengan value 'map'
 				center: {
 					lat: -6.595038,
 					lng: 106.816635
