@@ -10,15 +10,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					Place | Guest Book
 					<i class="fas fa-book"></i>
 				</h1>
-				<p class="subtitle">Find recommend Place from Guest</p>
+				<p class="subtitle">Find recommend Places from Guest</p>
 			</div>
 		</div>
 	</section>
 
-	<section class="section" v-if="!loading && count > 0">
+	<section class="section">
 		<div class="columns">
-			<div class="column is-8 is-offset-2 wow zoomIn" data-wow-duration="1s" data-wow-delay="0.6s">
-
+			<div
+				class="column is-8 is-offset-2 wow zoomIn"
+				data-wow-duration="1s"
+				data-wow-delay="0.6s"
+				v-if="!loading && count > 0"
+			>
 				<p class="title">{{ count }} Recommendations</p>
 				<p class="subtitle">
 					<a href="<?= base_url('guest/area'); ?>" class="button is-primary is-outlined">
@@ -35,7 +39,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<span>Show All</span>
 					</a>
 				</p>
-				<div class="table-responsive">
+
+				<!-- Pencarian -->
+				<div class="field">
+					<div class="control has-icons-right">
+						<input class="input" type="text" v-model="query" placeholder="Cari disini..." @input="fetchData()">
+						<span class="icon is-small is-right">
+							<i class="fas fa-search"></i>
+						</span>
+					</div>
+				</div>
+				
+				<!-- Jika kueri pencarian tidak ditemukan -->
+				<div class="box" v-if="!found">
+					<p class="title">Query "{{ query }}" Not Found</p>
+				</div>
+
+				<div class="table-responsive" v-if="found">
 					<table class="table is-fullwidth is-striped is-bordered">
 						<thead>
 							<tr>
@@ -57,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</th>
 							</tr>
 						</thead>
-						<tbody v-for="(guest, index) in guests">
+						<tbody v-for="(guest, index) in newGuests">
 							<tr>
 								<td>{{ guest.name }}</td>
 								<td>{{ guest.place }}</td>
@@ -93,7 +113,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<div class="has-text-centered" v-if="!loading && count < 1">
 		<p class="title">
-			<i class="fas fa-frown"></i>
+			<i class="fas fa-frown fa-2x"></i>
 		</p>
 		<p class="subtitle">
 			No Recomendations
@@ -107,6 +127,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</a>
 	</div>
 
+	<!-- Loading -->
 	<div class="has-text-centered" v-if="loading">
 		<p class="title">
 			<i class="fas fa-spinner fa-spin"></i>
@@ -116,6 +137,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</p>
 	</div>
 
+	<!-- Modal konfirmasi hapus data -->
 	<div class="modal" :class="{ 'is-active': visibleModalDelete }">
 		<div class="modal-background"></div>
 		<div class="modal-content">
@@ -125,7 +147,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<button class="button" @click="switchModal(null)">No</button>
 			</div>
 		</div>
-		<button class="modal-close is-large" aria-label="close" @click="switchModal(null)"></button>
 	</div>
 </div>
 
@@ -154,31 +175,53 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 const guest = new Vue({
 	el: '#guest',
 	data: () => ({
-		guests: {},
+		guests: [],
+		newGuests: [],
 		count: '',
+		query: '',
+		idPlace: '',
+		found: true,
 		loading: false,
 		visibleModalDelete: false,
-		idPlace: ''
 	}),
 
 	mounted() {
-		this.fetchData()
+		this.getData()
 	},
 
 	methods: {
-		// Method untuk menampilkan data tempat
-		fetchData () {
+		// Method untuk mengambil data tempat
+		getData () {
 			this.loading = true
 
 			axios.get('<?= base_url() ?>' + 'api/getAllPlaces')
 				.then(res => {
 					this.guests = res.data.data
 					this.count = res.data.data.length
+					this.fetchData()
 					this.loading = false
 				})
 				.catch(err => {
 					console.log(err)
 				})
+		},
+
+		// Method untuk filter pencarian berdasarkan field 'nama' dan 'place'
+		fetchData () {
+			this.newGuests = []
+			let query = this.query.toLowerCase()
+			this.guests.map((guest) => {
+				if (guest.name.toLowerCase().indexOf(query) !== -1 || guest.place.toLowerCase().indexOf(query) !== -1) {
+					this.newGuests.push(guest)
+				}
+			})
+
+			if (this.newGuests.length < 1) {
+				this.found = false
+
+			} else {
+				this.found = true
+			}
 		},
 
 		// Method untuk menghapus tempat
