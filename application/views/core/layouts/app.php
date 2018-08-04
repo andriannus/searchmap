@@ -10,6 +10,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<!-- Membuat title secara dinamis -->
 	<title><?= $title ?></title>
 
+	<!-- Meta HTML -->
+	<meta property="author" content="Andre Simamora">
+	<meta name='robots' content='index,follow'>
+	<meta name='description' content='Find places and Draw on Map using Google Maps API'>
+	<meta name='keywords' content='google maps, php, codeigniter, javascript, vue'>
+
+	<!-- Meta Geo -->
+	<meta property="geo.placename" content="Indonesia">
+	<meta property="geo.country" content="id">
+
+	<!-- Meta Social Media -->
+	<meta property="og:title" content="Welcome to Search Map">
+	<meta property="og:type" content="information">
+	<meta property="og:url" content="https://search-map.000webhostapp.com/">
+	<meta property="og:image" content="<?= base_url('assets/images/fav.png'); ?>">
+	<meta property="og:description" content="Find places and Draw on Map using Google Maps API">
+	<meta property="og:site_name" content="Search Map">
+
 	<link rel="icon" type="image/png" href="<?= base_url('assets/images/fav.png'); ?>"/>
 
 	<!-- Load asset CSS dan JavaScript. Koneksi internet diperlukan -->
