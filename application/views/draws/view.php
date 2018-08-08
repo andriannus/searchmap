@@ -187,8 +187,6 @@ const area = new Vue({
 						this.map.setCenter(latLng)
 						this.map.setZoom(13)
 					}
-
-					this.haveId = true
 				})
 				.catch(err => {
 					console.log(err)
