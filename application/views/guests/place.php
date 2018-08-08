@@ -15,126 +15,110 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</section>
 
-	<section class="section">
-		<div class="columns">
-			<div
-				class="column is-8 is-offset-2 wow zoomIn"
-				data-wow-duration="1s"
-				data-wow-delay="0.6s"
-				v-if="!loading && count > 0"
-			>
-				<p class="title">{{ count }} Recommendations</p>
-				<p class="subtitle">
-					<a href="<?= base_url('guest/area'); ?>" class="button is-primary is-outlined">
-						<span class="icon">
-							<i class="fas fa-map"></i>
-						</span>
-						<span>Areas</span>
-					</a>
+	<div id="content" style="display: none;">
+		<section class="section">
+			<div class="columns">
+				<div
+					class="column is-8 is-offset-2 wow zoomIn"
+					data-wow-duration="1s"
+					data-wow-delay="0.6s"
+					v-if="!loading && count > 0"
+				>
+					<p class="title">{{ count }} Recommendations</p>
+					<p class="subtitle">
+						<a href="<?= base_url('guest/area'); ?>" class="button is-primary is-outlined">
+							<span class="icon">
+								<i class="fas fa-map"></i>
+							</span>
+							<span>Areas</span>
+						</a>
 
-					<a href="<?= base_url('map/all'); ?>" class="button is-link is-outlined">
-						<span class="icon">
-							<i class="fas fa-eye"></i>
-						</span>
-						<span>Show All</span>
-					</a>
-				</p>
+						<a href="<?= base_url('map/all'); ?>" class="button is-link is-outlined">
+							<span class="icon">
+								<i class="fas fa-eye"></i>
+							</span>
+							<span>Show All</span>
+						</a>
+					</p>
 
-				<!-- Pencarian -->
-				<div class="field">
-					<div class="control has-icons-right">
-						<input class="input" type="text" v-model="query" placeholder="Cari disini..." @input="fetchData()">
-						<span class="icon is-small is-right">
-							<i class="fas fa-search"></i>
-						</span>
+					<!-- Pencarian -->
+					<div class="field">
+						<div class="control has-icons-right">
+							<input class="input" type="text" v-model="query" placeholder="Cari disini..." @input="fetchData()">
+							<span class="icon is-small is-right">
+								<i class="fas fa-search"></i>
+							</span>
+						</div>
+					</div>
+					
+					<!-- Jika kueri pencarian tidak ditemukan -->
+					<div class="box" v-if="!found">
+						<p class="title">Query "{{ query }}" Not Found</p>
+					</div>
+
+					<!-- Isi data -->
+					<div class="box" v-if="found" v-for="(guest, index) in newGuests">
+						<article class="media">
+							<div class="media-content">
+								<div class="content">
+									<p class="heading">
+										<strong>{{ guest.name }}</strong>,
+										<em>{{ guest.date | moment }}</em>
+									</p>
+									<p class="subtitle">{{ guest.place }}</p>
+								</div>
+							</div>
+
+							<div class="media-right">
+								<a
+									class="button is-link"
+									:href="'<?= base_url() ?>' + 'map/' + guest.id"
+								>
+									<span class="icon">
+										<i class="fas fa-eye"></i>
+									</span>
+								</a>
+
+								<button
+									class="button is-danger"
+									@click="switchModal(guest.id)"
+								>
+									<span class="icon">
+										<i class="fas fa-trash"></i>
+									</span>
+								</button>
+							</div>
+						</article>
 					</div>
 				</div>
-				
-				<!-- Jika kueri pencarian tidak ditemukan -->
-				<div class="box" v-if="!found">
-					<p class="title">Query "{{ query }}" Not Found</p>
-				</div>
-
-				<div class="table-responsive" v-if="found">
-					<table class="table is-fullwidth is-striped is-bordered">
-						<thead>
-							<tr>
-								<th width="25%">
-									<i class="fas fa-user"></i>
-									Guest Name
-								</th>
-								<th width="35%">
-									<i class="fas fa-map-marker-alt"></i>
-									Place Name
-								</th>
-								<th width="20%">
-									<i class="fas fa-clock"></i>
-									Date Created
-								</th>
-								<th width="20%">
-									<i class="fas fa-certificate"></i>
-									Action
-								</th>
-							</tr>
-						</thead>
-						<tbody v-for="(guest, index) in newGuests">
-							<tr>
-								<td>{{ guest.name }}</td>
-								<td>{{ guest.place }}</td>
-
-								<!-- Data yang ditampilkan akan difilter terlebih dahulu -->
-								<td>{{ guest.date | moment }}</td>
-								<td>
-									<a
-										class="button is-link"
-										:href="'<?= base_url() ?>' + 'map/' + guest.id"
-									>
-										<span class="icon">
-											<i class="fas fa-eye"></i>
-										</span>
-									</a>
-
-									<button
-										class="button is-danger"
-										@click="switchModal(guest.id)"
-									>
-										<span class="icon">
-											<i class="fas fa-trash"></i>
-										</span>
-									</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
 			</div>
+		</section>
+
+		<div class="has-text-centered" v-if="!loading && count < 1">
+			<p class="title">
+				<i class="fas fa-frown fa-2x"></i>
+			</p>
+			<p class="subtitle">
+				No Recomendations
+			</p>
+			<a class="button is-link" href="<?= base_url('map') ?>">
+				Add New Place
+			</a>
+
+			<a class="button is-link is-outlined" href="<?= base_url('guest/area') ?>">
+				Areas
+			</a>
 		</div>
-	</section>
 
-	<div class="has-text-centered" v-if="!loading && count < 1">
-		<p class="title">
-			<i class="fas fa-frown fa-2x"></i>
-		</p>
-		<p class="subtitle">
-			No Recomendations
-		</p>
-		<a class="button is-link" href="<?= base_url('map') ?>">
-			Add New Place
-		</a>
-
-		<a class="button is-link is-outlined" href="<?= base_url('guest/area') ?>">
-			Areas
-		</a>
-	</div>
-
-	<!-- Loading -->
-	<div class="has-text-centered" v-if="loading">
-		<p class="title">
-			<i class="fas fa-spinner fa-spin"></i>
-		</p>
-		<p class="subtitle">
-			Load Data..
-		</p>
+		<!-- Loading -->
+		<div class="has-text-centered" v-if="loading">
+			<p class="title">
+				<i class="fas fa-spinner fa-spin"></i>
+			</p>
+			<p class="subtitle">
+				Load Data..
+			</p>
+		</div>
 	</div>
 
 	<!-- Modal konfirmasi hapus data -->
@@ -192,6 +176,8 @@ const guest = new Vue({
 	methods: {
 		// Method untuk mengambil data tempat
 		getData () {
+			document.getElementById('content').style.display = 'block'
+			
 			this.loading = true
 
 			axios.get('<?= base_url() ?>' + 'api/getAllPlaces')
