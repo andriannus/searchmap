@@ -2,7 +2,7 @@
 > Find places and Draw on Map using Google Maps API
 
 ## What's New?
-1. Search in Guest Book
+1. New Style in Guest Book
 
 ## Tools
 1. PHP - CodeIgniter `3.1.9`
