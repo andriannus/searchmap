@@ -84,7 +84,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	// Fungsi untuk menampilkan button
 	function showBtnToTop () {
-		if (body.scrollTop > 10) {
+		if (body.scrollTop > 400) {
 			btnToTop.style.display = 'block'
 		
 		} else {
