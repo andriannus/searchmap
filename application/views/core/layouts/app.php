@@ -49,6 +49,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		.table-responsive {
 			overflow: auto;
 		}
+
+		#btn-to-top {
+			display: none;
+			position: fixed;
+			z-index: 1000;
+			right: 20px;
+			bottom: 35px;
+		}
 	</style>
 </head>
 <body>
@@ -62,7 +70,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<!-- Menampilkan halaman tertentu -->
 	<?php $this->load->view($page) ?>
 
+	<!-- Button back to top -->
+	<button id="btn-to-top" class="button is-dark" onclick="backToTop()">
+		<span class="icon">
+			<i class="fas fa-chevron-up"></i>
+		</span>
+	</button>
+
 	<script>
+	// Variabel untuk <body> dan #btn-to-top
+	let body = document.getElementsByTagName('body')[0]
+	let btnToTop = document.getElementById('btn-to-top')
+
+	// Fungsi untuk menampilkan button
+	function showBtnToTop () {
+		if (body.scrollTop > 10) {
+			btnToTop.style.display = 'block'
+		
+		} else {
+			btnToTop.style.display = 'none'
+		}
+	}
+
+	// Fungsi untuk kembali ke atas
+	function backToTop () {
+		body.scrollTop = 0
+	}
+
+	// Jalankan fungsi ketika user melakukan scroll
+	window.onscroll = () => showBtnToTop()
+
 	// Default untuk menggunakan Wow.js
 	wow = new WOW({}).init();
 	</script>
