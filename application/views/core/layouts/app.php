@@ -53,7 +53,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		#btn-to-top {
 			display: none;
 			position: fixed;
-			z-index: 1000;
 			right: 20px;
 			bottom: 35px;
 		}

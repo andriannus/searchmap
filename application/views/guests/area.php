@@ -221,6 +221,8 @@ const guest = new Vue({
 
 		// Method untuk menampilkan konfirmasi hapus area
 		switchModal (id) {
+			let htmlOverflow = document.getElementsByTagName('html')[0]
+
 			if (id === null) {
 				this.idArea = ''
 
@@ -229,6 +231,13 @@ const guest = new Vue({
 			}
 
 			this.visibleModalDelete = !this.visibleModalDelete
+
+			if (!this.visibleModalDelete) {
+				htmlOverflow.style.overflow = 'auto'
+
+			} else {
+				htmlOverflow.style.overflow = 'hidden'
+			}
 		}
 	},
 
