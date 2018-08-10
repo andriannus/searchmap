@@ -28,6 +28,18 @@ class Site extends CI_Controller {
 		$this->load->view($this->app, $data);
 	}
 
+	public function my()
+	{
+		$data = [
+			'title' => 'You Are Here Now - Search Map',
+			'navigation' => 'core/elements/navigation',
+			'menu' => 'my',
+			'page' => 'sites/my'
+		];
+
+		$this->load->view($this->app, $data);
+	}
+
 	// Menampilkan halaman tidak ditemukan
 	public function notFound()
 	{

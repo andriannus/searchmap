@@ -27,11 +27,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<i class="fas fa-home"></i>&nbsp;
 					Home
 				</a>
-				<a class="navbar-item wow slideInDown" href="<?= base_url('map') ?>" data-wow-duration="1s" data-wow-delay="0.4s">
+				<a
+					class="navbar-item wow slideInDown <?= (isset($menu) && $menu === 'my' ? 'is-active' : ''); ?>"
+					href="<?= base_url('my') ?>"
+					data-wow-duration="1s"
+					data-wow-delay="0.4s"
+				>
+					<i class="fas fa-user"></i>&nbsp;
+					Where am I?
+				</a>
+				<a class="navbar-item wow slideInDown" href="<?= base_url('map') ?>" data-wow-duration="1s" data-wow-delay="0.6s">
 					<i class="fas fa-map"></i>&nbsp;
 					Map
 				</a>
-				<a class="navbar-item wow slideInDown" href="<?= base_url('draw') ?>" data-wow-duration="1s" data-wow-delay="0.6s">
+				<a class="navbar-item wow slideInDown" href="<?= base_url('draw') ?>" data-wow-duration="1s" data-wow-delay="0.8s">
 					<i class="fas fa-pen"></i>&nbsp;
 					Draw Map
 				</a>
