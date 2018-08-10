@@ -4,6 +4,7 @@
 ## What's New?
 1. Guest Book New Style
 2. Button Back To Top
+3. Show Current Location using GPS
 
 ## Tools
 1. PHP - CodeIgniter `3.1.9`
