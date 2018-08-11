@@ -100,9 +100,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	window.onscroll = () => showBtnToTop()
 
 	// Default untuk menggunakan Wow.js
-	wow = new WOW({
-		offset: 700
-	}).init();
+	wow = new WOW().init();
 	</script>
 </body>
 </html>
