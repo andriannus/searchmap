@@ -31,108 +31,130 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<br>
 
 				<div class="columns">
-					<div class="column is-10 is-offset-1">
-						<div class="columns">
-							<div class="column wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s">
-								<div class="box">
-									<div class="media">
-										<div class="media-left">
-											<span class="icon">
-												<i class="fas fa-crosshairs is-size-4 has-text-link"></i>
-											</span>
-										</div>
+					<div class="column wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s">
+						<div class="box">
+							<div class="media">
+								<div class="media-left">
+									<span class="icon">
+										<i class="fas fa-crosshairs is-size-4 has-text-link"></i>
+									</span>
+								</div>
 
-										<div class="media-content">
-											<div class="content">
-												<p>
-													<strong>Loc</strong>
-												</p>
-												<p>
-													Where am I?
-												</p>
-												<a class="button is-link" href="<?= base_url('my') ?>">
-													<span>Click Here</span>
-												</a>
-											</div>
-										</div>
+								<div class="media-content">
+									<div class="content">
+										<p>
+											<strong>Loc</strong>
+										</p>
+										<p>
+											Hello, Where am I..?
+										</p>
+										<a class="button is-link" href="<?= base_url('my') ?>">
+											<span>Click Here</span>
+										</a>
 									</div>
 								</div>
 							</div>
+						</div>
+					</div>
 
-							<div class="column wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.4s">
-								<div class="box">
-									<div class="media">
-										<div class="media-left">
-											<span class="icon">
-												<i class="fas fa-map-marker-alt is-size-4 has-text-danger"></i>
-											</span>
-										</div>
+					<div class="column wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.4s">
+						<div class="box">
+							<div class="media">
+								<div class="media-left">
+									<span class="icon">
+										<i class="fas fa-map-marker-alt is-size-4 has-text-danger"></i>
+									</span>
+								</div>
 
-										<div class="media-content">
-											<div class="content">
-												<p>
-													<strong>Map</strong>
-												</p>
-												<p>
-													Find Your Place...
-												</p>
-												<a class="button is-danger" href="<?= base_url('map') ?>">
-													<span>Click Here</span>
-												</a>
-											</div>
-										</div>
+								<div class="media-content">
+									<div class="content">
+										<p>
+											<strong>Map</strong>
+										</p>
+										<p>
+											Find Your Fav. Place..
+										</p>
+										<a class="button is-danger" href="<?= base_url('map') ?>">
+											<span>Click Here</span>
+										</a>
 									</div>
 								</div>
 							</div>
+						</div>
+					</div>
 
-							<div class="column wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
-								<div class="box">
-									<div class="media">
-										<div class="media-left">
-											<span class="icon">
-												<i class="fas fa-pen is-size-4 has-text-success"></i>
-											</span>
-										</div>
+					<div class="column wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+						<div class="box">
+							<div class="media">
+								<div class="media-left">
+									<span class="icon">
+										<i class="fas fa-pen is-size-4 has-text-success"></i>
+									</span>
+								</div>
 
-										<div class="media-content">
-											<div class="content">
-												<p>
-													<strong>Draw</strong>
-												</p>
-												<p>
-													Let's Draw a Map...
-												</p>
-												<a class="button is-success" href="<?= base_url('draw') ?>">
-													<span>Click Here</span>
-												</a>
-											</div>
-										</div>
+								<div class="media-content">
+									<div class="content">
+										<p>
+											<strong>Draw</strong>
+										</p>
+										<p>
+											Let's Draw a Map..
+										</p>
+										<a class="button is-success" href="<?= base_url('draw') ?>">
+											<span>Click Here</span>
+										</a>
 									</div>
 								</div>
 							</div>
+						</div>
+					</div>
 
-							<div class="column wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.8s">
-								<div class="box">
-									<div class="media">
-										<div class="media-left">
-											<span class="icon">
-												<i class="fas fa-book is-size-4 has-text-primary"></i>
-											</span>
-										</div>
+					<div class="column wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.8s">
+						<div class="box">
+							<div class="media">
+								<div class="media-left">
+									<span class="icon">
+										<i class="fas fa-book is-size-4 has-text-primary"></i>
+									</span>
+								</div>
 
-										<div class="media-content">
-											<div class="content">
-												<p>
-													<strong>Guest</strong>
-												</p>
-												<p>
-													Guest Book Here...
-												</p>
-												<a class="button is-primary" href="<?= base_url('guest') ?>">
-													<span>Click Here</span>
-												</a>
-											</div>
-										</div>
+								<div class="media-content">
+									<div class="content">
+										<p>
+											<strong>Guest</strong>
+										</p>
+										<p>
+											Guest Book Here...
+										</p>
+										<a class="button is-primary" href="<?= base_url('guest') ?>">
+											<span>Click Here</span>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="column wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s">
+						<div class="box">
+							<div class="media">
+								<div class="media-left">
+									<span class="icon">
+										<i class="fas fa-user is-size-4 has-text-dark"></i>
+									</span>
+								</div>
+
+								<div class="media-content">
+									<div class="content">
+										<p>
+											<strong>User</strong>
+										</p>
+										<p>
+											Register/Login First..
+										</p>
+										<a class="button is-dark" href="<?= base_url('guest') ?>">
+											<span>Click Here</span>
+										</a>
 									</div>
 								</div>
 							</div>
