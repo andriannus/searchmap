@@ -53,9 +53,11 @@ $route['default_controller'] = 'site';
 $route['404_override'] = 'site/notfound';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['u/(:any)'] = 'user/view/$1';
 $route['my'] = 'site/my';
 $route['login'] = 'auth/login';
 $route['register'] = 'auth/register';
+$route['logout'] = 'auth/logout';
 $route['map/(:num)'] = 'map/index/$1';
 $route['draw/(:num)'] = 'draw/index/$1';
 $route['404'] = 'site/notfound';
