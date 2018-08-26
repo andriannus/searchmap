@@ -50,6 +50,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="navbar-item wow slideInDown" data-wow-duration="1s" data-wow-delay="0.8s">
 					<div class="field is-grouped">
 						<p class="control">
+							<?php
+							if ($this->session->login == TRUE) {
+							?>
+
+							<button class="button is-danger" @click="logout">
+								<span class="icon">
+									<i class="fas fa-sign-out-alt"></i>
+								</span>
+								<span>Logout</span>
+							</button>
+							
+							<?php
+							} else {
+							?>
+
+							<a class="button is-success" href="<?= base_url('login') ?>">
+								<span class="icon">
+									<i class="fas fa-sign-in-alt"></i>
+								</span>
+								<span>Login</span>
+							</a>
+
+							<?php
+							}
+							?>
+
 							<a class="button is-info" href="<?= base_url('guest') ?>">
 								<span class="icon">
 									<i class="fas fa-book"></i>
@@ -102,6 +128,10 @@ const app = new Vue({
 	methods: {
 		switchMenu () {
 			this.isActive = !this.isActive
+		},
+
+		logout() {
+			window.location.replace('<?= base_url() ?>' + 'logout')
 		}
 	}
 })

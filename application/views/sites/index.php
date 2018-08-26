@@ -2,15 +2,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<div id="app">
+<div id="index">
 	<section class="hero is-dark is-bold is-large">
 		<div class="hero-body">
 			<div class="container has-text-centered">
 				<h1 class="title wow zoomIn" data-wow-duration="1s">
-					Welcome To
+					<?= ($this->session->login == TRUE ? 'Hello ' . $this->session->name : 'Welcome To') ?>
 				</h1>
 				<h2 class="subtitle wow zoomIn" data-wow-duration="1s" data-wow-delay="0.2s">
-					<i class="fas fa-map"></i> Search Map
+					<?= ($this->session->login == TRUE ? 'Welcome To - <i class="fas fa-map"></i> Search Map' : '<i class="fas fa-map"></i> Search Map') ?>
 				</h2>
 			</div>
 		</div>
@@ -150,9 +150,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<strong>User</strong>
 										</p>
 										<p>
-											Register/Login First..
+											<?= ($this->session->login == TRUE ? 'Show Your Profile..' : 'Register/Login First..') ?>
 										</p>
-										<a class="button is-dark" href="<?= base_url('guest') ?>">
+										<a class="button is-dark" href="<?= ($this->session->login == TRUE ? base_url('u/') . $this->session->username : base_url('login')) ?>">
 											<span>Click Here</span>
 										</a>
 									</div>
@@ -268,3 +268,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</footer>
 </div>
+
+<script>
+const index = new Vue({
+	el: '#index',
+	data: () => ({
+
+	}),
+
+	methods: {
+	}
+})
+</script>
