@@ -43,7 +43,7 @@ class Auth extends CI_Controller {
 			return $this->output
 									->set_status_header(200)
 									->set_output(json_encode([
-											'status' => false,
+											'success' => false,
 											'message' => 'E-mail cannot be used'
 										]));
 
@@ -51,7 +51,7 @@ class Auth extends CI_Controller {
 			return $this->output
 									->set_status_header(200)
 									->set_output(json_encode([
-											'status' => true,
+											'success' => true,
 											'message' => 'E-mail can be used'
 										]));
 		}
@@ -67,7 +67,7 @@ class Auth extends CI_Controller {
 			return $this->output
 									->set_status_header(200)
 									->set_output(json_encode([
-											'status' => false,
+											'success' => false,
 											'message' => 'Username cannot be used'
 										]));
 
@@ -75,7 +75,7 @@ class Auth extends CI_Controller {
 			return $this->output
 									->set_status_header(200)
 									->set_output(json_encode([
-											'status' => true,
+											'success' => true,
 											'message' => 'Username can be used'
 										]));
 		}
