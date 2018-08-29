@@ -155,12 +155,12 @@ const register = new Vue({
 				},
 
 				username: {
+					presence: {
+						allowEmpty: false
+					},
 					format: {
 						pattern: '[a-zA-Z0-9]+',
 						message: 'Username must be the alphabetic or numeric or both'
-					},
-					presence: {
-						allowEmpty: false
 					},
 					length: {
 						minimum: 8,
