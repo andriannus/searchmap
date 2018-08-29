@@ -118,7 +118,8 @@ const register = new Vue({
 		passwordErrors: [],
 		debounce: '',
 		constrains: '',
-		isLoading: false
+		isLoading: false,
+		isLoadTyping: false
 	}),
 
 	mounted () {
@@ -136,6 +137,10 @@ const register = new Vue({
 					presence: {
 						allowEmpty: false,
 					},
+					format: {
+						pattern: '[a-zA-Z ]+',
+						message: 'Name must be the alphabetic'
+					},
 					length: {
 						minimum: 5,
 						maximum: 100
@@ -150,6 +155,10 @@ const register = new Vue({
 				},
 
 				username: {
+					format: {
+						pattern: '[a-zA-Z0-9]+',
+						message: 'Username must be the alphabetic or numeric or both'
+					},
 					presence: {
 						allowEmpty: false
 					},
@@ -171,6 +180,7 @@ const register = new Vue({
 		},
 
 		isTyping (method) {
+			this.isLoadTyping = true
 			this.debounce(method)
 		},
 
@@ -203,6 +213,8 @@ const register = new Vue({
 			} else {
 				this.emailErrors = errors
 			}
+
+			this.isLoadTyping = false
 		},
 
 		checkUsername () {
@@ -223,6 +235,8 @@ const register = new Vue({
 			} else {
 				this.usernameErrors = errors
 			}
+
+			this.isLoadTyping = false
 		},
 
 		checkPassword () {
@@ -237,7 +251,7 @@ const register = new Vue({
 		},
 
 		checkForm () {
-			if (!this.name || !this.email || !this.username || !this.password || this.nameErrors.length > 0 || this.emailErrors.length > 0 || this.usernameErrors.length > 0 || this.passwordErrors.length > 0) {
+			if (!this.name || !this.email || !this.username || !this.password || this.nameErrors.length > 0 || this.emailErrors.length > 0 || this.usernameErrors.length > 0 || this.passwordErrors.length > 0 || this.isLoadTyping) {
 				return true
 
 			} else {
