@@ -115,7 +115,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | @click	-> Melakukan method tertentu ketika bagian tersebut diklik
 |
 | Untuk lebih lengkapnya, silahkan kunjungi:
-| https://vue.js.org
+| https://vuejs.org
 |
 */
 

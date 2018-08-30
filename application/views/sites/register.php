@@ -11,6 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="box">
 							<p class="title has-text-centered">Register</p>
 
+							<!-- Field Name -->
 							<div class="field">
 								<label class="label">Name</label>
 								<div class="control">
@@ -24,9 +25,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										@input="checkName"
 									>
 								</div>
+								<!-- Pesan Error -->
 								<p class="help is-danger" v-if="nameErrors">{{ nameErrors[0] }}</p>
 							</div>
 
+							<!-- Field E-mail -->
 							<div class="field">
 								<label class="label">E-mail</label>
 								<div class="control">
@@ -40,9 +43,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										@input="isTyping(checkEmail)"
 									>
 								</div>
+								<!-- Pesan Error -->
 								<p class="help is-danger" v-if="emailErrors">{{ emailErrors[0] }}</p>
 							</div>
 
+							<!-- Field Username -->
 							<div class="field">
 								<label class="label">Username</label>
 								<div class="control">
@@ -56,9 +61,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										@input="isTyping(checkUsername)"
 									>
 								</div>
+								<!-- Pesan Error -->
 								<p class="help is-danger" v-if="usernameErrors">{{ usernameErrors[0] }}</p>
 							</div>
 
+							<!-- Field Password -->
 							<div class="field">
 								<label class="label">Password</label>
 								<div class="control">
@@ -72,6 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										@input="checkPassword"
 									>
 								</div>
+								<!-- Pesan Error -->
 								<p class="help is-danger" v-if="passwordErrors">{{ passwordErrors[0] }}</p>
 							</div>
 
@@ -105,6 +113,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <script>
+/*
+|--------------------------------------------------------------------------
+| Vue.js
+|--------------------------------------------------------------------------
+|
+| new Vue({}) -> Instance Vue.js
+|
+| Digunakan untuk mengawali Vue.js
+| 
+| el 			-> Target yang akan dimanupulasi oleh Vue.js
+| data 		-> Data (variabel) pada Vue.js
+| methods	-> Menampung Method yang akan digunakan
+| 
+| {{}}		-> Menampilkan data (variabel)
+| @click	-> Melakukan method tertentu ketika bagian tersebut diklik
+|
+| Untuk lebih lengkapnya, silahkan kunjungi:
+| https://vuejs.org
+|
+*/
 const register = new Vue({
 	el: '#register',
 	data: () => ({
@@ -128,10 +156,12 @@ const register = new Vue({
 
 	methods: {
 		config () {
+			// Function yang akan mengeksekusi method setelah user setelai mengetik.
 			this.debounce = _.debounce(function (method) {
 				method()
-			}, 1000)
+			}, 1000) // Jeda 1ms setelah selesai mengetik
 
+			// Validasi
 			this.constrains = {
 				name: {
 					presence: {
@@ -184,6 +214,7 @@ const register = new Vue({
 			this.debounce(method)
 		},
 
+		// Method untuk cek nama
 		checkName () {
 			const errors = validate.single(this.name, this.constrains.name)
 
@@ -195,16 +226,18 @@ const register = new Vue({
 			}
 		},
 
+		// Method untuk cek e-mail
 		checkEmail () {
 			const errors = validate.single(this.email, this.constrains.email)
 			
+			// Jika tidak ada yang error
 			if (!errors) {
 				this.emailErrors = []
 
 				let data = 'email=' + this.email
-				axios.post('<?= base_url() ?>' + 'auth/checkEmail', data)
+				axios.post('<?= base_url() ?>' + 'auth/checkEmail', data) // Cek ketersediaan e-mail
 					.then(res => {
-						if (!res.data.success) this.emailErrors.push(res.data.message)
+						if (!res.data.success) this.emailErrors.push(res.data.message) // Jika e-mail telah digunakan, tampilkan pesan error
 					})
 					.catch(err => {
 						console.log(err)
@@ -217,16 +250,18 @@ const register = new Vue({
 			this.isLoadTyping = false
 		},
 
+		// Method untuk cek username
 		checkUsername () {
 			const errors = validate.single(this.username, this.constrains.username)
 
+			// Jika tidak ada yang error
 			if (!errors) {
 				this.usernameErrors = []
 
 				let data = 'username=' + this.username
-				axios.post('<?= base_url() ?>' + 'auth/checkUsername', data)
+				axios.post('<?= base_url() ?>' + 'auth/checkUsername', data) // Cek ketersediaan username
 					.then(res => {
-						if (!res.data.success) this.usernameErrors.push(res.data.message)
+						if (!res.data.success) this.usernameErrors.push(res.data.message) // Jika username telah digunakan, tampilkan pesan error
 					})
 					.catch(err => {
 						console.log(err)
@@ -239,6 +274,7 @@ const register = new Vue({
 			this.isLoadTyping = false
 		},
 
+		// Method untuk cek password
 		checkPassword () {
 			const errors = validate.single(this.password, this.constrains.password)
 
@@ -250,6 +286,7 @@ const register = new Vue({
 			}
 		},
 
+		// Method untuk mengaktifkan/menonaktifkan button submit
 		checkForm () {
 			if (!this.name || !this.email || !this.username || !this.password || this.nameErrors.length > 0 || this.emailErrors.length > 0 || this.usernameErrors.length > 0 || this.passwordErrors.length > 0 || this.isLoadTyping) {
 				return true
@@ -259,6 +296,7 @@ const register = new Vue({
 			}
 		},
 
+		// Method untuk post data
 		submitForm () {
 			this.isLoading = true
 
@@ -271,7 +309,7 @@ const register = new Vue({
 				.then(res => {
 					if (res.data.success) {
 						this.isLoading = false
-						window.location.replace('<?= base_url() ?>' + 'login')
+						window.location.replace('<?= base_url() ?>' + 'login') // Pindah ke halaman login dengan menghapus history halaman sebelumnya
 					}
 				})
 				.catch(err => {

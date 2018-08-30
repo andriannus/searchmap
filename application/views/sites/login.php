@@ -11,6 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="box">
 							<p class="title has-text-centered">Login</p>
 
+							<!-- Pesan error -->
 							<div class="field" v-if="isShow">
 								<div class="notification is-danger">
 									<button class="delete" @click="resetShow"></button>
@@ -18,6 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</div>
 							</div>
 
+							<!-- Field username -->
 							<div class="field">
 								<label class="label">Username</label>
 								<div class="control">
@@ -31,6 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</div>
 							</div>
 
+							<!-- Field password -->
 							<div class="field">
 								<label class="label">Password</label>
 								<div class="control">
@@ -68,6 +71,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <script>
+/*
+|--------------------------------------------------------------------------
+| Vue.js
+|--------------------------------------------------------------------------
+|
+| new Vue({}) -> Instance Vue.js
+|
+| Digunakan untuk mengawali Vue.js
+| 
+| el 			-> Target yang akan dimanupulasi oleh Vue.js
+| data 		-> Data (variabel) pada Vue.js
+| methods	-> Menampung Method yang akan digunakan
+| 
+| {{}}		-> Menampilkan data (variabel)
+| @click	-> Melakukan method tertentu ketika bagian tersebut diklik
+|
+| Untuk lebih lengkapnya, silahkan kunjungi:
+| https://vuejs.org
+|
+*/
 const login = new Vue({
 	el: '#login',
 	data: () => ({
@@ -79,6 +102,7 @@ const login = new Vue({
 	}),
 
 	methods: {
+		// Method untuk submit form
 		submitForm () {
 			this.isLoading = true
 
@@ -96,7 +120,7 @@ const login = new Vue({
 					
 					} else {
 						console.log(res.data.message)
-						window.location.replace('<?= base_url() ?>')
+						window.location.replace('<?= base_url() ?>') // Pindah ke halaman awal dengan menghapus history halaman sebelumnya
 					}
 				})
 				.catch(err => {
@@ -104,6 +128,7 @@ const login = new Vue({
 				})
 		},
 
+		// Method untuk menghapus pesan error
 		resetShow () {
 			this.message = ''
 			this.isShow = false
