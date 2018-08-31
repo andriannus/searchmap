@@ -36,16 +36,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
 	<script src="<?= base_url('assets/js/wow.min.js'); ?>"></script>
-	<script src="https://unpkg.com/vue@2.5.16/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/vue@2.5.17/dist/vue.min.js"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.12.0/validate.min.js"></script>
 	<script src="https://momentjs.com/downloads/moment.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&libraries=places,drawing"></script>
 
 	<style>
 		html {
 			overflow: auto;
+		}
+
+		canvas {
+			top: 0;
+			left: 0;
+			position: fixed;
 		}
 		
 		.table-responsive {
@@ -101,8 +108,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	// Jalankan fungsi ketika user melakukan scroll
 	window.onscroll = () => showBtnToTop()
 
+	particlesJS.load('particle-js', '<?= base_url() ?>' + 'assets/particles.json')
+
 	// Default untuk menggunakan Wow.js
-	wow = new WOW().init();
+	wow = new WOW().init()
 	</script>
 </body>
 </html>

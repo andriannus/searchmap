@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div id="index">
 	<section class="hero is-dark is-bold is-large">
+		<div id="particle-js"></div>
 		<div class="hero-body">
 			<div class="container has-text-centered">
 				<h1 class="title wow zoomIn" data-wow-duration="1s">
@@ -224,7 +225,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="control">
 							<div class="tags has-addons">
 								<span class="tag is-dark">vue.js</span>
-								<span class="tag">2.5.16</span>
+								<span class="tag">2.5.17</span>
+							</div>
+						</div>
+
+						<div class="control">
+							<div class="tags has-addons">
+								<span class="tag is-dark">lodash</span>
+								<span class="tag">4.17.10</span>
+							</div>
+						</div>
+
+						<div class="control">
+							<div class="tags has-addons">
+								<span class="tag is-dark">validate.js</span>
+								<span class="tag">0.12.0</span>
 							</div>
 						</div>
 
@@ -232,6 +247,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<div class="tags has-addons">
 								<span class="tag is-dark">moment.js</span>
 								<span class="tag">2.22.2</span>
+							</div>
+						</div>
+
+						<div class="control">
+							<div class="tags has-addons">
+								<span class="tag is-dark">particles.js</span>
+								<span class="tag">2.0.0</span>
 							</div>
 						</div>
 
