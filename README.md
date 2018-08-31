@@ -2,14 +2,13 @@
 > Find places and Draw on Map using Google Maps API
 
 ## What's New?
-1. Guest Book New Style
-2. Button Back To Top
-3. Show Current Location using GPS
+1. Home Page New Style
+2. Login/Register with Interesting Features
 
 ## Tools
 1. PHP - CodeIgniter `3.1.9`
 2. CSS - Bulma and Animate.css
-3. JavaScript - Vue.js `2.5.16`, Moment.js `2.22.2`, Wow.js, and Axios
+3. JavaScript - Vue.js `2.5.17`, Lodash `4.17.10`, Validate.js `0.12.0`, Moment.js `2.22.2`, Particles.js `2.0.0`, Wow.js, and Axios
 4. Google Maps API `Places API For Web` and `Maps Javascript API`
 
 ## Installation
@@ -28,10 +27,13 @@ Plase visit `http://localhost/searchmap`
 ## References
 1. Google Maps API - [Link](https://developers.google.com/maps/documentation)
 2. Vue.js - [Link](https://vuejs.org)
-3. Moment.js - [Link](https://momentjs.com)
-4. Wow.js - [Link](https://wowjs.uk)
-5. Bulma - [Link](https://bulma.io)
-6. Animate.css - [Link](https://daneden.github.io/animate.css)
+3. Lodash - [Link](https://lodash.com)
+4. Validate.js - [Link](https://validatejs.org)
+5. Particles.js - [Link](https://github.com/VincentGarreau/particles.js)
+6. Moment.js - [Link](https://momentjs.com)
+7. Wow.js - [Link](https://wowjs.uk)
+8. Bulma - [Link](https://bulma.io)
+9. Animate.css - [Link](https://daneden.github.io/animate.css)
 
 ## License
 [MIT](https://github.com/andriannus/searchmap/blob/master/LICENSE)
