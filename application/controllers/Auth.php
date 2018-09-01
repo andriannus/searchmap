@@ -105,6 +105,7 @@ class Auth extends CI_Controller {
 			$user = $result->row();
 
 			$data = [
+				'id_user' => $user->id,
 				'name' => $user->name,
 				'username' => $username,
 				'login' => TRUE
@@ -151,6 +152,30 @@ class Auth extends CI_Controller {
 									->set_output(json_encode([
 											'success' => true,
 											'message' => 'Account created'
+										]));
+		}
+	}
+
+	public function currentUser()
+	{
+		$login = $this->session->login;
+		$user = $this->session->userdata();
+
+		if (!$login) {
+			return $this->output
+									->set_status_header('200')
+									->set_output(json_encode([
+											'success' => false,
+											'message' => 'No user login'
+										]));
+
+		} else {
+			return $this->output
+									->set_status_header('200')
+									->set_output(json_encode([
+											'success' => true,
+											'message' => 'User log in',
+											'data' => $user
 										]));
 		}
 	}

@@ -46,7 +46,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<div class="modal" :class="{ 'is-active': visibleModal }">
 		<div class="modal-background"></div>
-		<div class="modal-card">
+		
+		<div class="modal-card" v-if="isLogin">
 			<header class="modal-card-head">
 				<p class="modal-card-title">Guest Book</p>
 				<button class="delete" aria-label="close" @click="switchModal"></button>
@@ -55,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="field">
 					<label class="label">Nama</label>
 					<div class="control has-icons-left">
-						<input class="input" type="text" placeholder="Nama atau Inisial" v-model="name"></input>
+						<input class="input" type="text" placeholder="Nama atau Inisial" v-model="name" readonly></input>
 						<span class="icon is-small is-left">
 							<i class="fas fa-user"></i>
 						</span>
@@ -67,6 +68,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<button class="button is-success is-loading" v-if="inTheProcess">Save</button>
 				<button class="button" @click="switchModal">Cancel</button>
 			</footer>
+		</div>
+
+		<div class="modal-content" v-if="!isLogin">
+			<div class="box">
+				<p class="title">Please log in first..</p>
+				<a class="button is-dark" :href="'<?= base_url() ?>' + 'login?redirect=' + currentUrl">Login</a>
+				<button class="button" @click="switchModal">Cancel</button>
+			</div>
 		</div>
 	</div>
 </div>
@@ -96,6 +105,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 const app = new Vue({
 	el: '#app',
 	data: () => ({
+		idUser: '',
+		currentUrl: window.location,
 		name: '',
 		placeName: '',
 		placeAddress: '',
@@ -105,11 +116,13 @@ const app = new Vue({
 		visibleInfoWindow: 'none',
 		visibleModal: false,
 		inTheProcess: false,
+		isLogin: false,
 		saved: false
 	}),
 	
 	mounted () {
-		this.initMap()
+		this.initMap(),
+		this.getCurrentUser()
 	},
 
 	methods: {
@@ -217,9 +230,26 @@ const app = new Vue({
 				})
 		},
 
+		// Method untuk cek user yang sedang login
+		getCurrentUser () {
+			axios.get('<?= base_url() ?>' + 'auth/currentUser')
+				.then(res => {
+					if (!res.data.success) {
+						this.isLogin = false
+
+					} else {
+						this.idUser = res.data.data.id_user
+						this.name = res.data.data.name
+						this.isLogin = true
+					}
+				})
+				.catch(err => {
+					console.log(err)
+				})
+		},
+
 		// Method untuk mengatur pop up Modal
 		switchModal () {
-			this.name = ''
 			this.visibleModal = !this.visibleModal
 		}
 	}

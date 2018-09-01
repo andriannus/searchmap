@@ -97,11 +97,26 @@ const login = new Vue({
 		username: '',
 		password: '',
 		message: '',
+		urlRedirect: '',
 		isShow: false,
 		isLoading: false
 	}),
 
+	mounted () {
+		this.checkRedirectUrl()
+	},
+
 	methods: {
+		checkRedirectUrl () {
+			let url = window.location.href
+			let param = new URL(url).searchParams
+			let redirect = param.get('redirect')
+
+			if (redirect !== null) {
+				this.urlRedirect = redirect
+			}
+		},
+
 		// Method untuk submit form
 		submitForm () {
 			this.isLoading = true
@@ -119,8 +134,12 @@ const login = new Vue({
 						this.isShow = true
 					
 					} else {
-						console.log(res.data.message)
-						window.location.replace('<?= base_url() ?>') // Pindah ke halaman awal dengan menghapus history halaman sebelumnya
+						if (!this.urlRedirect) {
+							window.location.replace('<?= base_url() ?>') // Pindah ke halaman awal dengan menghapus history halaman sebelumnya
+						
+						} else {
+							window.location.replace(this.urlRedirect)
+						}
 					}
 				})
 				.catch(err => {
