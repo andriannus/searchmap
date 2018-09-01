@@ -108,8 +108,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	// Jalankan fungsi ketika user melakukan scroll
 	window.onscroll = () => showBtnToTop()
 
-	particlesJS.load('particle-js', '<?= base_url() ?>' + 'assets/particles.json')
-
 	// Default untuk menggunakan Wow.js
 	wow = new WOW().init()
 	</script>

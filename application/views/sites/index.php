@@ -292,6 +292,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <script>
+particlesJS.load('particle-js', '<?= base_url() ?>' + 'assets/particles.json')
+
 const index = new Vue({
 	el: '#index',
 	data: () => ({
