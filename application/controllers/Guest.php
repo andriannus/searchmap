@@ -35,6 +35,7 @@ class Guest extends CI_Controller {
 		$data = [
 			'title' => 'Guest Book - Search Map',
 			'navigation' => $this->nav,
+			'menu' => 'guest',
 			'page' => 'guests/index'
 		];
 

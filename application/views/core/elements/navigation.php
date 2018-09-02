@@ -3,9 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <div id="app">
-	<nav class="navbar is-fixed-top is-light" role="navigation" aria-label="main navigation">
+	<nav class="navbar is-fixed-top is-light" role="navigation" aria-label="main dropdown navigation">
 		<div class="navbar-brand">
-			<a class="navbar-item wow slideInLeft" href="<?= base_url() ?>" data-wow-duration="1s">
+			<a class="navbar-item" href="<?= base_url() ?>">
 				SEARCH MAP
 			</a>
 
@@ -19,76 +19,71 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="navbar-menu" :class="{ 'is-active': isActive }">
 			<div class="navbar-start">
 				<a
-					class="navbar-item wow slideInDown <?= (isset($menu) && $menu === 'home' ? 'is-active' : ''); ?>"
+					class="navbar-item <?= (isset($menu) && $menu === 'home' ? 'is-active' : ''); ?>"
 					href="<?= base_url() ?>"
-					data-wow-duration="1s"
-					data-wow-delay="0.2s"
 				>
 					<i class="fas fa-home"></i>&nbsp;
 					Home
 				</a>
-				<a
-					class="navbar-item wow slideInDown <?= (isset($menu) && $menu === 'my' ? 'is-active' : ''); ?>"
-					href="<?= base_url('my') ?>"
-					data-wow-duration="1s"
-					data-wow-delay="0.4s"
-				>
-					<i class="fas fa-user"></i>&nbsp;
-					Where am I?
-				</a>
-				<a class="navbar-item wow slideInDown" href="<?= base_url('map') ?>" data-wow-duration="1s" data-wow-delay="0.6s">
-					<i class="fas fa-map"></i>&nbsp;
-					Map
-				</a>
-				<a class="navbar-item wow slideInDown" href="<?= base_url('draw') ?>" data-wow-duration="1s" data-wow-delay="0.8s">
-					<i class="fas fa-pen"></i>&nbsp;
-					Draw Map
-				</a>
+
+				<div class="navbar-item has-dropdown is-hoverable">
+					<a class="navbar-link" href="#">
+						Feature
+					</a>
+
+					<div class="navbar-dropdown is-boxed">
+						<a
+							class="navbar-item <?= (isset($menu) && $menu === 'my' ? 'is-active' : ''); ?>"
+							href="<?= base_url('my') ?>"
+						>Where am I?</a>
+
+						<a class="navbar-item" href="<?= base_url('map') ?>">Map</a>
+
+						<a class="navbar-item" href="<?= base_url('draw') ?>">Draw Map</a>
+
+						<a
+							class="navbar-item <?= (isset($menu) && $menu === 'guest' ? 'is-active' : ''); ?>"
+							href="<?= base_url('guest') ?>"
+						>Guest Book</a>
+					</div>
+				</div>
 			</div>
 
 			<div class="navbar-end">
-				<div class="navbar-item wow slideInDown" data-wow-duration="1s" data-wow-delay="0.8s">
+				<div class="navbar-item">
 					<div class="field is-grouped">
 						<p class="control">
 							<?php
 							if ($this->session->login == TRUE) {
 							?>
 
+							<a class="button is-dark" href="<?= base_url('u/') . $this->session->username ?>">
+								<span class="icon">
+									<i class="fas fa-user"></i>
+								</span>
+							</a>
+
 							<button class="button is-danger" @click="logout">
 								<span class="icon">
 									<i class="fas fa-sign-out-alt"></i>
 								</span>
-								<span>Logout</span>
 							</button>
 							
 							<?php
 							} else {
 							?>
 
-							<a class="button is-success" href="<?= base_url('login') ?>">
-								<span class="icon">
-									<i class="fas fa-sign-in-alt"></i>
-								</span>
-								<span>Login</span>
+							<a class="button is-dark" href="<?= base_url('login') ?>">
+								Login
+							</a>
+
+							<a class="button is-dark" href="<?= base_url('register') ?>">
+								Register
 							</a>
 
 							<?php
 							}
 							?>
-
-							<a class="button is-info" href="<?= base_url('guest') ?>">
-								<span class="icon">
-									<i class="fas fa-book"></i>
-								</span>
-								<span>Guest Book</span>
-							</a>
-
-							<a class="button is-dark" href="https://github.com/andriannus/searchmap" target="_blank">
-								<span class="icon">
-									<i class="fab fa-github"></i>
-								</span>
-								<span>Github</span>
-							</a>
 						</p>
 					</div>
 				</div>
