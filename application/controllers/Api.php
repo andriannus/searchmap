@@ -105,14 +105,14 @@ class Api extends CI_Controller {
 	// Simpan tempat
 	public function storePlace()
 	{
-		$name = $this->input->post('name');
+		$id_user = $this->input->post('id_user');
 		$place = $this->input->post('place');
 		$address = $this->input->post('address');
 		$lat = $this->input->post('lat');
 		$lng = $this->input->post('lng');
 
 		$data = [
-			'name' => $name,
+			'id_user' => $id_user,
 			'place' => $place,
 			'address' => $address,
 			'lat' => $lat,

@@ -211,7 +211,7 @@ const app = new Vue({
 		savePlace () {
 			this.inTheProcess = true
 
-			let data = 	'name=' + this.name + 
+			let data = 	'id_user=' + this.idUser + 
 									'&place=' + this.placeName +
 									'&address=' + this.placeAddress + 
 									'&lat=' + this.placeLat + 
