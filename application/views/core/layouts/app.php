@@ -49,10 +49,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			overflow: auto;
 		}
 
-		canvas {
+		#particle-js {
 			top: 0;
 			left: 0;
-			position: fixed;
+			position: absolute;
 		}
 		
 		.table-responsive {
