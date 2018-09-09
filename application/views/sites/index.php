@@ -5,8 +5,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div id="index">
 	<section class="hero is-dark is-bold is-large">
 		<div class="hero-body">
+			<div id="particle-js"></div>
 			<div class="container has-text-centered">
-				<div id="particle-js"></div>
 				<h1 class="title wow zoomIn" data-wow-duration="1s">
 					<?= ($this->session->login == TRUE ? 'Hello ' . $this->session->name : 'Welcome To') ?>
 				</h1>

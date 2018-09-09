@@ -54,24 +54,13 @@ class Api extends CI_Controller {
 	{
 		$places = $this->guest->getAllPlacesByUsername($username)->result();
 
-		if (empty($places)) {
-			// Menampilkan output dalam bentuk JSON
-			return $this->output
-									->set_status_header(404) // Status HTTP Not Found
-									->set_output(json_encode([
-											'success' => false,
-											'message' => 'Not found'
-										]));
-
-		} else {
-			return $this->output
-									->set_status_header(200) // Respon HTTP Success
-									->set_output(json_encode([
-											'success' => true,
-											'message' => 'Success get all recommend places by username',
-											'data' => $places
-										]));
-		}
+		return $this->output
+								->set_status_header(200) // Respon HTTP Success
+								->set_output(json_encode([
+										'success' => true,
+										'message' => 'Success get all recommend places by username',
+										'data' => $places
+									]));
 	}
 
 	// Menampilkan satu data tempat
