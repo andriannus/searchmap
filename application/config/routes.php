@@ -54,6 +54,7 @@ $route['404_override'] = 'site/notfound';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['u/(:any)'] = 'user/view/$1';
+$route['u/(:any)/places'] = 'user/getPlaces/$1';
 $route['my'] = 'site/my';
 $route['login'] = 'auth/login';
 $route['register'] = 'auth/register';

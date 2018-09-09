@@ -16,7 +16,7 @@ class M_guest extends CI_Model {
 
 	public function getOnePlace($id)
 	{
-		$this->db->where($this->tb_place . '.id', $id);
+		$this->db->where('tb_guestbook.id', $id);
 		$this->db->join('tb_user', 'tb_user.id = tb_guestbook.id_user');
 		$place = $this->db->get($this->tb_place);
 		return $place;
