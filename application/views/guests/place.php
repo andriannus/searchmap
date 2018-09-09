@@ -78,15 +78,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<i class="fas fa-eye"></i>
 									</span>
 								</a>
-
-								<button
-									class="button is-danger"
-									@click="switchModal(guest.id)"
-								>
-									<span class="icon">
-										<i class="fas fa-trash"></i>
-									</span>
-								</button>
 							</div>
 						</article>
 					</div>
@@ -120,18 +111,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</p>
 		</div>
 	</div>
-
-	<!-- Modal konfirmasi hapus data -->
-	<div class="modal" :class="{ 'is-active': visibleModalDelete }">
-		<div class="modal-background"></div>
-		<div class="modal-content">
-			<div class="box">
-				<p class="title">Really?</p>
-				<button class="button is-danger" @click="deletePlace">Yes</button>
-				<button class="button" @click="switchModal(null)">No</button>
-			</div>
-		</div>
-	</div>
 </div>
 
 <script>
@@ -163,7 +142,6 @@ const guest = new Vue({
 		newGuests: [],
 		count: '',
 		query: '',
-		idPlace: '',
 		found: true,
 		loading: false,
 		visibleModalDelete: false,
@@ -207,43 +185,6 @@ const guest = new Vue({
 
 			} else {
 				this.found = true
-			}
-		},
-
-		// Method untuk menghapus tempat
-		deletePlace () {
-			axios.post('<?= base_url() ?>' + 'api/destroyPlace/' + this.idPlace)
-				.then(res => {
-					if (!res.data.success) {
-						alert('Error')
-
-					} else {
-						location.reload() // Reload halaman
-					}
-				})
-				.catch(err => {
-					console.log(err)
-				})
-		},
-
-		// Method untuk menampilkan konfirmasi hapus data
-		switchModal (id) {
-			let htmlOverflow = document.getElementsByTagName('html')[0]
-
-			if (id === null) {
-				this.idPlace = ''
-
-			} else {
-				this.idPlace = id
-			}
-
-			this.visibleModalDelete = !this.visibleModalDelete
-
-			if (!this.visibleModalDelete) {
-				htmlOverflow.style.overflow = 'auto'
-
-			} else {
-				htmlOverflow.style.overflow = 'hidden'
 			}
 		}
 	},
