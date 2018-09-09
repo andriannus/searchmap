@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 26, 2018 at 10:45 PM
+-- Generation Time: Sep 09, 2018 at 07:46 PM
 -- Server version: 10.1.35-MariaDB-1~xenial
 -- PHP Version: 7.2.8-1+ubuntu16.04.1+deb.sury.org+1
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tb_guestbook` (
   `id` int(10) NOT NULL,
-  `name` varchar(100) NOT NULL,
+  `id_user` int(10) NOT NULL,
   `place` varchar(200) NOT NULL,
   `address` text NOT NULL,
   `lat` varchar(20) NOT NULL,
@@ -104,13 +104,13 @@ ALTER TABLE `tb_guestbook`
 -- AUTO_INCREMENT for table `tb_guestbookarea`
 --
 ALTER TABLE `tb_guestbookarea`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
