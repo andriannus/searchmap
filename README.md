@@ -1,9 +1,9 @@
 # Search Map
-> Find places and Draw on Map using Google Maps API
+> Find places, Draw on Map, and Show Current Location using Google Maps API
 
 ## What's New?
-1. Home Page New Style
-2. Login/Register with Interesting Features
+1. Login before saving a place
+2. New navigation menu display
 
 ## Tools
 1. PHP - CodeIgniter `3.1.9`
