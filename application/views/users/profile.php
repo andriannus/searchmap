@@ -16,12 +16,50 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</section>
 
+	<?php
+	if (!$user->username === $this->session->username) {
+	?>
+
 	<section class="section">
 		<div class="columns">
 			<div class="column is-4 is-offset-4 has-text-centered">
 				<div class="columns">
 					<div class="column">
+						<div class="box button-box" @click="goToMyPlaces">
+							<p>
+								<span class="is-size-1 has-text-danger">
+									<i class="fas fa-map-marker-alt"></i>
+								</span>
+							</p>
+							<small>Places</small>
+						</div>
+					</div>
+
+					<div class="column">
 						<div class="box button-box">
+							<p>
+								<span class="is-size-1 has-text-success">
+									<i class="fas fa-map"></i>
+								</span>
+							</p>
+							<small>Areas</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<?php
+	} else {
+	?>
+
+	<section class="section">
+		<div class="columns">
+			<div class="column is-4 is-offset-4 has-text-centered">
+				<div class="columns">
+					<div class="column">
+						<div class="box button-box" @click="goToMyPlaces">
 							<p>
 								<span class="is-size-1 has-text-danger">
 									<i class="fas fa-map-marker-alt"></i>
@@ -69,4 +107,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 		</div>
 	</section>
+
+	<?php
+	}
+	?>
 </div>
+
+<script>
+const profile = new Vue({
+	el: '#profile',
+	data: () => ({
+
+	}),
+
+	methods: {
+		goToMyPlaces () {
+			location.href = '<?= base_url() ?>' + 'u/' + '<?= $user->username ?>' + '/places';
+		}
+	}
+})
+</script>
