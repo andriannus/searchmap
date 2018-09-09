@@ -23,15 +23,15 @@ class Api extends CI_Controller {
 	// Menampilkan semua data tempat
 	public function getAllPlaces()
 	{
-		$place = $this->guest->getAllPlaces()->result();
+		$places = $this->guest->getAllPlaces()->result();
 
 		// Menampilkan output dalam bentuk JSON
 		return $this->output
 								->set_status_header(200) // Respon HTTP Success
 								->set_output(json_encode([
 										'success' => true,
-										'message' => 'Success get all recommend place',
-										'data' => $place
+										'message' => 'Success get all recommend places',
+										'data' => $places
 									]));
 	}
 
@@ -48,6 +48,30 @@ class Api extends CI_Controller {
 										'message' => 'Success get all recommend area',
 										'data' => $area
 									]));
+	}
+
+	public function getAllPlacesByUsername($username)
+	{
+		$places = $this->guest->getAllPlacesByUsername($username)->result();
+
+		if (empty($places)) {
+			// Menampilkan output dalam bentuk JSON
+			return $this->output
+									->set_status_header(404) // Status HTTP Not Found
+									->set_output(json_encode([
+											'success' => false,
+											'message' => 'Not found'
+										]));
+
+		} else {
+			return $this->output
+									->set_status_header(200) // Respon HTTP Success
+									->set_output(json_encode([
+											'success' => true,
+											'message' => 'Success get all recommend places by username',
+											'data' => $places
+										]));
+		}
 	}
 
 	// Menampilkan satu data tempat

@@ -10,8 +10,8 @@ class M_guest extends CI_Model {
 	{
 		$this->db->order_by('date', 'DESC');
 		$this->db->join('tb_user', 'tb_user.id = tb_guestbook.id_user');
-		$place = $this->db->get($this->tb_place);
-		return $place;
+		$places = $this->db->get($this->tb_place);
+		return $places;
 	}
 
 	public function getOnePlace($id)
@@ -20,6 +20,14 @@ class M_guest extends CI_Model {
 		$this->db->join('tb_user', 'tb_user.id = tb_guestbook.id_user');
 		$place = $this->db->get($this->tb_place);
 		return $place;
+	}
+
+	public function getAllPlacesByUsername($username)
+	{
+		$this->db->where('username', $username);
+		$this->db->join('tb_user', 'tb_user.id = tb_guestbook.id_user');
+		$places = $this->db->get($this->tb_place);
+		return $places;
 	}
 
 	public function getAllAreas()

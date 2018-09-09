@@ -44,4 +44,18 @@ class User extends CI_Controller {
 			$this->load->view($this->app, $data);
 		}
 	}
+
+	public function place($username)
+	{
+		$user = $this->user->view($username)->row();
+
+		$data = [
+			'title' => 'Reccomended Places by ' . $user->name . ' - Search Map',
+			'navigation' => $this->nav,
+			'page' => 'users/place',
+			'user' => $user
+		];
+
+		$this->load->view($this->app, $data);
+	}
 }
