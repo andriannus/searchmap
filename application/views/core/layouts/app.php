@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		#particle-js {
 			top: 0;
 			left: 0;
+			width: 100%;
 			position: absolute;
 		}
 		
@@ -64,6 +65,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			position: fixed;
 			right: 20px;
 			bottom: 35px;
+		}
+
+		.button-box:hover {
+			background-color: #ddd;
+			cursor: pointer;
 		}
 	</style>
 </head>

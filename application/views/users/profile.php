@@ -18,8 +18,54 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<section class="section">
 		<div class="columns">
-			<div class="column is-8 is-offset-2 has-text-centered">
-				
+			<div class="column is-4 is-offset-4 has-text-centered">
+				<div class="columns">
+					<div class="column">
+						<div class="box button-box">
+							<p>
+								<span class="is-size-1 has-text-danger">
+									<i class="fas fa-map-marker-alt"></i>
+								</span>
+							</p>
+							<small>My Places</small>
+						</div>
+					</div>
+
+					<div class="column">
+						<div class="box button-box">
+							<p>
+								<span class="is-size-1 has-text-success">
+									<i class="fas fa-map"></i>
+								</span>
+							</p>
+							<small>My Areas</small>
+						</div>
+					</div>
+				</div>
+
+				<div class="columns">
+					<div class="column">
+						<div class="box button-box">
+							<p>
+								<span class="is-size-1 has-text-dark">
+									<i class="fas fa-user"></i>
+								</span>
+							</p>
+							<small>Profile</small>
+						</div>
+					</div>
+
+					<div class="column">
+						<div class="box button-box">
+							<p>
+								<span class="is-size-1 has-text-primary">
+									<i class="fas fa-bell"></i>
+								</span>
+							</p>
+							<small>Notification</small>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
