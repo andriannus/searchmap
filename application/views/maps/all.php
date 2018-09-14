@@ -45,22 +45,23 @@ const app = new Vue({
 		infoWindow: '',
 		infoWindowContent: [],
 		marker: [],
-		visibleCard: 'none'
+		baseUrl: '<?= base_url() ?>',
+		visibleCard: 'none',
 	}),
 	
-	mounted () {
-		this.initMap()
+	mounted() {
+		this.initMap();
 	},
 
 	methods: {
-		initMap () {
+		initMap() {
 			this.map = new google.maps.Map(this.$refs.map, {
 				center: {
 					lat: -2.279866,
 					lng: 117.369878
 				},
 				zoom: 5,
-				disableDefaultUI: true
+				disableDefaultUI: true,
 			});
 
 			let card = this.$refs.mapCard // Get mapCard element
@@ -69,63 +70,63 @@ const app = new Vue({
 
 			this.infoWindow = new google.maps.InfoWindow({
 				maxWidth: 231
-			})
+			});
 			
 			// Ketika Maps berhasil dimuat
-			google.maps.event.addListenerOnce(this.map, 'tilesloaded', function () {
-				app.visibleCard = 'block'
-			})
+			google.maps.event.addListenerOnce(this.map, 'tilesloaded', () => {
+				this.visibleCard = 'block';
+			});
 
 			// Menjalankan method tertentu
-			this.fetchData()
+			this.fetchData();
 		},
 
-		fetchData () {
+		fetchData() {
 			// Axios get (sama seperti jQuery AJAX)
 			// Digunakan untuk mengambil data dari Api Controller
-			axios.get('<?= base_url() ?>' + 'api/getAllPlaces')
-				.then(res => {
-					const places = res.data.data
+			axios.get(`${this.baseUrl}api/getAllPlaces`)
+				.then((res) => {
+					const places = res.data.data;
 
 					// Perulangan berdasarkan data pada database
 					for (let i=0; i<places.length; i++) {
-						this.infoWindowContent[i] = this.getInfoWindowContent(places[i])
+						this.infoWindowContent[i] = this.getInfoWindowContent(places[i]);
 
 						// Menentukan koordinat dengan Google Maps LatLng
-						let latLng = new google.maps.LatLng(places[i].lat, places[i].lng)
+						let latLng = new google.maps.LatLng(places[i].lat, places[i].lng);
 
 						// Menampilkan Marker
 						this.marker[i] = new google.maps.Marker({
 							position: latLng,
 							map: this.map
-						})
+						});
 
 						// app.---
 						// Digunakan untuk menentukan nilai dari variabel Vue.js dari Google Maps
-						this.marker[i].addListener('click', function () {
-							app.infoWindow.setContent(app.infoWindowContent[i])
-							app.infoWindow.open(app.map, app.marker[i])
-							app.map.setCenter(app.marker[i].getPosition())
-							app.map.setZoom(15)
+						this.marker[i].addListener('click', () => {
+							this.infoWindow.setContent(this.infoWindowContent[i]);
+							this.infoWindow.open(this.map, this.marker[i]);
+							this.map.setCenter(this.marker[i].getPosition());
+							this.map.setZoom(15);
 						})
 					}
 				})
-				.catch(err => {
-					alert('Terjadi Error. Silahkan refresh halaman')
+				.catch((err) => {
+					alert('Terjadi Error. Silahkan refresh halaman');
 				})
 		},
 
 		// Method untuk membuat isi dari InfoWindow
-		getInfoWindowContent (loc) {
+		getInfoWindowContent(loc) {
 			let content = `
 										<div id="infowindow">
 											<span class="subtitle">${ loc.place }</span><br><br>
 											<p>${ loc.address }</p>
 										</div>	
-										`
+										`;
 
-			return content // Mengembalikan nilai dari variabel
-		}
-	}
-})
+			return content; // Mengembalikan nilai dari variabel
+		},
+	},
+});
 </script>

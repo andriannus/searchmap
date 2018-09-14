@@ -55,59 +55,63 @@ const app = new Vue({
 		placeAddress: '<?= $place->address ?>',
 		placeLat: <?= $place->lat ?>,
 		placeLng: <?= $place->lng ?>,
+		map: '',
+		latLng: '',
+		infowindow: '',
+		card: '',
 		visibleCard: 'none',
-		visibleInfoWindow: 'none'
+		visibleInfoWindow: 'none',
 	}),
 	
-	mounted () {
-		this.initMap()
+	mounted() {
+		this.initMap();
 	},
 
 	methods: {
-		initMap () {
+		initMap() {
 			// Google Maps LatLng
-			const latLng = new google.maps.LatLng(this.placeLat, this.placeLng)
+			this.latLng = new google.maps.LatLng(this.placeLat, this.placeLng);
 
-			const map = new google.maps.Map(this.$refs.map, {
-				center: latLng,
+			this.map = new google.maps.Map(this.$refs.map, {
+				center: this.latLng,
 				zoom: 17,
-				disableDefaultUI: true
+				disableDefaultUI: true,
 			});
 
-			let card = this.$refs.mapCard // Get mapCard element
+			this.card = this.$refs.mapCard; // Get mapCard element
 
-			map.controls[google.maps.ControlPosition.LEFT_TOP].push(card);
+			this.map.controls[google.maps.ControlPosition.LEFT_TOP].push(this.card);
 
 			// Google Maps InfoWindow (pop up pada marker)
-			const infowindow = new google.maps.InfoWindow({
+			this.InfoWindow = new google.maps.InfoWindow({
 				maxWidth: 231
 			});
 
 			// Google Maps Marker
 			const marker = new google.maps.Marker({
-				map: map,
-				position: latLng,
+				map: this.map,
+				position: this.latLng,
 				anchorPoint: new google.maps.Point(0, -29)
 			});
 
 			// Isi dari InfoWindow
-			let infowindowContent = this.$refs.mapInfoWindow
-			infowindow.setContent(infowindowContent)
+			let infowindowContent = this.$refs.mapInfoWindow;
+			this.InfoWindow.setContent(infowindowContent);
 
 			// Show InfoWindow
-			this.visibleInfoWindow = 'inline'
-			infowindow.open(map, marker)
+			this.visibleInfoWindow = 'inline';
+			this.InfoWindow.open(this.map, marker);
 
 			// Ketika Marker diklik
 			marker.addListener('click', function () {
-				infowindow.open(map, marker)
-			})
+				this.InfoWindow.open(this.map, marker);
+			});
 			
 			// Ketika Maps selesai dimuat
-			google.maps.event.addListenerOnce(map, 'tilesloaded', function () {
-				app.visibleCard = 'block' // Menentukan nilai pada variabel Vue.js
+			google.maps.event.addListenerOnce(this.map, 'tilesloaded', () => {
+				this.visibleCard = 'block' // Menentukan nilai pada variabel Vue.js
 			})
-		}
-	}
-})
+		},
+	},
+});
 </script>

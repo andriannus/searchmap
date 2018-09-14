@@ -112,21 +112,22 @@ const app = new Vue({
 		placeAddress: '',
 		placeLat: '',
 		placeLng: '',
+		baseUrl: '<?= base_url() ?>',
 		visibleCard: 'none',
 		visibleInfoWindow: 'none',
 		visibleModal: false,
 		inTheProcess: false,
 		isLogin: false,
-		saved: false
+		saved: false,
 	}),
 	
-	mounted () {
-		this.initMap(),
-		this.getCurrentUser()
+	mounted() {
+		this.initMap();
+		this.getCurrentUser();
 	},
 
 	methods: {
-		initMap () {
+		initMap() {
 			// 'app' -> 'const app = new Vue({})'
 
 			const map = new google.maps.Map(this.$refs.map, {
@@ -139,14 +140,14 @@ const app = new Vue({
 			});
 
 			// Membuat variabel berdasarkan tag HTML dengan atribut 'ref' = '...'
-			let card = this.$refs.mapCard
-			let input = this.$refs.mapInput
-			let button = this.$refs.buttonSave
+			let card = this.$refs.mapCard;
+			let input = this.$refs.mapInput;
+			let button = this.$refs.buttonSave;
 
 			map.controls[google.maps.ControlPosition.LEFT_TOP].push(card);
 
 			// Google Maps Autocomplete
-			const autocomplete = new google.maps.places.Autocomplete(input)
+			const autocomplete = new google.maps.places.Autocomplete(input);
 
 			const infowindow = new google.maps.InfoWindow({
 				maxWidth: 231
@@ -158,100 +159,100 @@ const app = new Vue({
 				anchorPoint: new google.maps.Point(0, -29)
 			});
 
-			let infowindowContent = this.$refs.mapInfoWindow
-			infowindow.setContent(infowindowContent)
+			let infowindowContent = this.$refs.mapInfoWindow;
+			infowindow.setContent(infowindowContent);
 
-			autocomplete.bindTo('bounds', map)
+			autocomplete.bindTo('bounds', map);
 
 			// Ketika tempat berubah
-			autocomplete.addListener('place_changed', function () {
-				app.saved = false
+			autocomplete.addListener('place_changed', () => {
+				this.saved = false;
 
 				infowindow.close();
 				marker.setVisible(false);
-				let place = autocomplete.getPlace()
+				let place = autocomplete.getPlace();
 
 				if (!place.geometry) {
-					window.alert("No details available for input: '" + place.name + "'");
+					window.alert(`No details available for input: ${place.name}`);
 					return;
-				}
+				};
 
 				if (place.geometry.viewport) {
 					map.fitBounds(place.geometry.viewport)
 				} else {
 					map.setCenter(place.geometry.location)
 					map.setZoom(17)
-				}
+				};
 
-				marker.setPosition(place.geometry.location)
-				marker.setVisible(true)
+				marker.setPosition(place.geometry.location);
+				marker.setVisible(true);
 
 				// Menentukan nilai variabel Vue.js
-				app.placeName = place.name
-				app.placeAddress = place.formatted_address
-				app.placeLat = place.geometry.location.lat()
-				app.placeLng = place.geometry.location.lng()
-				app.visibleInfoWindow = 'inline'
+				this.placeName = place.name;
+				this.placeAddress = place.formatted_address;
+				this.placeLat = place.geometry.location.lat();
+				this.placeLng = place.geometry.location.lng();
+				this.visibleInfoWindow = 'inline';
 
-				infowindow.open(map, marker)
+				infowindow.open(map, marker);
 			});
 
 			// Ketika Marker diklik
 			marker.addListener('click', function () {
-				infowindow.open(map, marker)
-			})
+				infowindow.open(map, marker);
+			});
 			
 			// Ketika Maps berhasil dimuat
-			google.maps.event.addListenerOnce(map, 'tilesloaded', function () {
-				app.visibleCard = 'block'
-			})
+			google.maps.event.addListenerOnce(map, 'tilesloaded', () => {
+				this.visibleCard = 'block'
+			});
 		},
 
 		// Method untuk menyimpan tempat
 		savePlace () {
-			this.inTheProcess = true
+			this.inTheProcess = true;
 
 			let data = 	'id_user=' + this.idUser + 
 									'&place=' + this.placeName +
 									'&address=' + this.placeAddress + 
 									'&lat=' + this.placeLat + 
-									'&lng=' + this.placeLng
+									'&lng=' + this.placeLng;
 
 			// Axios post (sama seperti jQuery AJAX)
 			// Digunakan untuk menyimpan data ke database
-			axios.post('<?= base_url() ?>' + 'api/storePlace', data)
-				.then(res => {
-					this.inTheProcess = false
-					this.visibleModal = false
-					this.saved = true
+			axios.post(`${this.baseUrl}api/storePlace`, data)
+				.then((res) => {
+					this.inTheProcess = false;
+					this.visibleModal = false;
+					this.saved = true;
 				})
-				.catch(err => {
-					console.log(err)
-				})
+				.catch((err) => {
+					console.log(err);
+				});
 		},
 
 		// Method untuk cek user yang sedang login
-		getCurrentUser () {
-			axios.get('<?= base_url() ?>' + 'auth/currentUser')
-				.then(res => {
+		getCurrentUser() {
+			axios.get(`${this.baseUrl}auth/currentUser`)
+				.then((res) => {
 					if (!res.data.success) {
-						this.isLogin = false
+						this.isLogin = false;
 
 					} else {
-						this.idUser = res.data.data.id_user
-						this.name = res.data.data.name
-						this.isLogin = true
+						this.idUser = res.data.data.id_user;
+						this.name = res.data.data.name;
+						this.isLogin = true;
 					}
 				})
 				.catch(err => {
 					console.log(err)
-				})
+				});
 		},
 
 		// Method untuk mengatur pop up Modal
-		switchModal () {
-			this.visibleModal = !this.visibleModal
-		}
-	}
-})
+		switchModal() {
+			this.visibleModal = !this.visibleModal;
+		},
+	},
+});
 </script>
