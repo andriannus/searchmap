@@ -126,9 +126,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<p class="title">
 				<i class="fas fa-frown fa-2x"></i>
 			</p>
+
+			<?php
+			if ($this->session->login && $user->username === $this->session->username) {
+			?>
+
+			<p class="subtitle">
+				You don't have a place saved
+			</p>
+			<a class="button is-link" href="<?= base_url('map') ?>">
+				Add New Place
+			</a>
+
+			<?php
+			} else {
+			?>
+
 			<p class="subtitle">
 				No Recomendations
 			</p>
+
+			<?php
+			}
+			?>
 		</div>
 
 		<!-- Loading -->
