@@ -148,10 +148,24 @@ const guest = new Vue({
   }),
 
   mounted() {
+    this.configPusher();
     this.getData();
   },
 
   methods: {
+    configPusher() {
+      const pusher = new Pusher('cb0f6cab84cda0b83c75', {
+        cluster: 'ap1',
+        encrypted: true
+      });
+
+      const channel = pusher.subscribe('search-map');
+
+      channel.bind('add-place', () => {
+        this.getData();
+      })
+    },
+
     // Method untuk mengambil data tempat
     getData () {
       document.getElementById('content').style.display = 'block';

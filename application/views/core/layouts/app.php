@@ -38,6 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <script src="<?= base_url('assets/js/wow.min.js'); ?>"></script>
   <script src="https://unpkg.com/vue@2.5.17/dist/vue.min.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.12.0/validate.min.js"></script>
   <script src="https://momentjs.com/downloads/moment.min.js"></script>

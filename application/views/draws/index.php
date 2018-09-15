@@ -275,9 +275,21 @@ const area = new Vue({
       axios.post('<?= base_url() ?>' + 'api/storeArea', data)
         // then / catch -> Promise JavaScript
         .then((res) => {
+          this.trigger();
           this.inTheProcess = false;
           this.visibleModal = false;
           this.saved = true;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    // Method untuk melakukan trigger ke Pusher
+    trigger() {
+      axios.get('<?= base_url() ?>' + 'pusher/addArea')
+        .then((res) => {
+          console.log(res);
         })
         .catch((err) => {
           console.log(err);

@@ -222,6 +222,7 @@ const app = new Vue({
       // Digunakan untuk menyimpan data ke database
       axios.post(`${this.baseUrl}api/storePlace`, data)
         .then((res) => {
+          this.trigger();
           this.inTheProcess = false;
           this.visibleModal = false;
           this.saved = true;
@@ -246,6 +247,17 @@ const app = new Vue({
         })
         .catch(err => {
           console.log(err)
+        });
+    },
+
+    // Method untuk melakukan trigger ke Pusher
+    trigger() {
+      axios.get('<?= base_url() ?>' + 'pusher/addPlace')
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
 
