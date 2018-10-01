@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-const app = new Vue({
+new Vue({
   el: '#app',
   data: () => ({
     map: '',

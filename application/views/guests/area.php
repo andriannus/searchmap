@@ -149,7 +149,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-const guest = new Vue({
+new Vue({
   el: '#guest',
   data: () => ({
     guests: [],

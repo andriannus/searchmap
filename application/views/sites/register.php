@@ -133,13 +133,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | https://vuejs.org
 |
 */
-const register = new Vue({
+new Vue({
   el: '#register',
   data: () => ({
     name: '',
     email: '',
     username: '',
     password: '',
+    baseUrl: '<?= base_url() ?>',
     nameErrors: [],
     emailErrors: [],
     usernameErrors: [],
@@ -229,20 +230,19 @@ const register = new Vue({
     // Method untuk cek e-mail
     checkEmail() {
       const errors = validate.single(this.email, this.constrains.email);
-      
+
       // Jika tidak ada yang error
       if (!errors) {
         this.emailErrors = [];
 
         let data = `email=${this.email}`;
-        axios.post('<?= base_url() ?>' + 'auth/checkEmail', data) // Cek ketersediaan e-mail
+        axios.post(`${this.baseUrl}auth/checkEmail`, data) // Cek ketersediaan e-mail
           .then((res) => {
             if (!res.data.success) this.emailErrors.push(res.data.message); // Jika e-mail telah digunakan, tampilkan pesan error
           })
           .catch((err) => {
             console.log(err);
           });
-      
       } else {
         this.emailErrors = errors;
       }
@@ -259,14 +259,13 @@ const register = new Vue({
         this.usernameErrors = [];
 
         let data = `username=${this.username}`;
-        axios.post('<?= base_url() ?>' + 'auth/checkUsername', data) // Cek ketersediaan username
+        axios.post(`${this.baseUrl}auth/checkUsername`, data) // Cek ketersediaan username
           .then((res) => {
             if (!res.data.success) this.usernameErrors.push(res.data.message); // Jika username telah digunakan, tampilkan pesan error
           })
           .catch((err) => {
             console.log(err);
           });
-      
       } else {
         this.usernameErrors = errors;
       }
@@ -280,7 +279,6 @@ const register = new Vue({
 
       if (!errors) {
         this.passwordErrors = [];
-
       } else {
         this.passwordErrors = errors;
       }
@@ -290,14 +288,13 @@ const register = new Vue({
     checkForm() {
       if (!this.name || !this.email || !this.username || !this.password || this.nameErrors.length > 0 || this.emailErrors.length > 0 || this.usernameErrors.length > 0 || this.passwordErrors.length > 0 || this.isLoadTyping) {
         return true;
-
       } else {
         return false;
       }
     },
 
     // Method untuk post data
-    submitForm () {
+    submitForm() {
       this.isLoading = true;
 
       let data =  'name=' + this.name +
@@ -305,11 +302,11 @@ const register = new Vue({
                   '&username=' + this.username +
                   '&password=' + this.password;
 
-      axios.post('<?= base_url() ?>' + 'auth/registerProcess', data)
+      axios.post(`${this.baseUrl}auth/registerProcess`, data)
         .then((res) => {
           if (res.data.success) {
             this.isLoading = false;
-            window.location.replace('<?= base_url() ?>' + 'login'); // Pindah ke halaman login dengan menghapus history halaman sebelumnya
+            window.location.replace(`${this.baseUrl}login`); // Pindah ke halaman login dengan menghapus history halaman sebelumnya
           }
         })
         .catch((err) => {

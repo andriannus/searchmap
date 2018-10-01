@@ -91,12 +91,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | https://vuejs.org
 |
 */
-const login = new Vue({
+new Vue({
   el: '#login',
   data: () => ({
     username: '',
     password: '',
     message: '',
+    baseUrl: '<?= base_url() ?>',
     urlRedirect: '',
     isShow: false,
     isLoading: false,
@@ -118,32 +119,31 @@ const login = new Vue({
     },
 
     // Method untuk submit form
-    submitForm () {
+    submitForm() {
       this.isLoading = true;
 
       let data =  'username=' + this.username +
                   '&password=' + this.password;
 
-      axios.post('<?= base_url() ?>' + 'auth/loginProcess', data)
+      axios.post(`${this.baseUrl}auth/loginProcess`, data)
         .then((res) => {
-          this.isLoading = false
+          this.isLoading = false;
 
           if (!res.data.success) {
             this.password = '';
             this.message = res.data.message;
             this.isShow = true;
-          
+
           } else {
             if (!this.urlRedirect) {
-              window.location.replace('<?= base_url() ?>'); // Pindah ke halaman awal dengan menghapus history halaman sebelumnya
-            
+              window.location.replace(this.baseUrl); // Pindah ke halaman awal dengan menghapus history halaman sebelumnya
             } else {
               window.location.replace(this.urlRedirect);
             }
           }
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
         });
     },
 
